@@ -29,4 +29,4 @@ Route::middleware(['maneger_and_admin'])->group(function () {
     Route::resource("expenses",\App\Http\Controllers\ExpensController::class);
     Route::resource("settings",\App\Http\Controllers\SettingController::class);
 });
-Route::get('index/add', [App\Http\Controllers\PlayerController::class, 'indexUser'])->name("indexUser");
+Route::get('index/add', [App\Http\Controllers\PlayerController::class, 'indexUser'])->name("indexUser"); 
