@@ -1,0 +1,1 @@
+<h1>Players Admin Index</h1>

@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Domains\Users\Models;
+
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasRoles;
+    protected $table = 'users';
+    protected $guard_name = 'web';
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
+    
+}

@@ -1,0 +1,97 @@
+body {
+    font-family: 'Cairo', sans-serif;
+}
+
+.phone .iti--allow-dropdown {
+    width: 100%;
+}
+
+.side-menu__item i {
+    color: #6c757d !important;
+}
+
+.side-menu__item.active i {
+    color: #277aec !important;
+}
+
+.submit {
+    cursor: pointer;
+}
+
+.submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.spinner {
+    border: 2px solid white;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.bg-primary-subtle {
+    background-color: #cfe2ff !important;
+    color: #0d6efd !important; 
+ }
+ .bg-danger-subtle {
+    background-color: #f8d7da !important;
+    color: #dc3545 !important; 
+ }
+ .bg-info-subtle {
+    background-color: #cff4fc !important;
+    color: #0dcaf0 !important; 
+ }
+ .bg-success-subtle {
+    background-color: #d1e7dd !important;
+    color: #20c997 !important; 
+ }
+ .bg-warning-subtle {
+    background-color: #ffe69c !important;
+    color: #ffc107 !important; 
+ }
+ .bg-secondary-subtle {
+    background-color: #e9ecef !important;
+    color: #adb5bd !important; 
+ }
+ .bg-pink-subtle {
+    background-color: #f7d6e6 !important;
+    color: #d63384 !important; 
+ }
+.rounded-3 {
+    border-radius: 1rem;
+}
+/* .main-logo{
+    height: 4rem !important;
+}
+.main-sidebar-header{
+    display: block !important;
+}
+@media (max-width: 768px) and (min-width: 574px) {
+    .responsive-logo .logo-1 {
+        height: 4rem !important;
+    }
+}
+@media (max-width: 574px) {
+    .responsive-logo .logo-2 {
+        height: 4rem !important;
+    }
+}
+.menu-icon{
+    font-size: 1.5em !important;
+}
+.sign-favicon{
+    height: 80px !important;
+} */

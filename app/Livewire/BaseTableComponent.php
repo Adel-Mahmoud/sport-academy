@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Livewire;
+
+use Livewire\Component;
+use Livewire\WithPagination;
+
+abstract class BaseTableComponent extends Component
+{
+    use WithPagination;
+
+    public string $search = '';
+
+    public array $selected = [];
+
+    public bool $selectAll = false;
+
+    protected $paginationTheme = 'bootstrap';
+
+    protected string $model;
+
+    protected int $perPage = 10;
+
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function deleteItem($id): void
+    {
+        $this->model::findOrFail($id)->delete();
+
+        $this->dispatch('swal:success', [
+            'title' => 'تم الحذف!',
+            'text'  => 'تم حذف البيانات بنجاح.',
+        ]);
+
+        $this->dispatch('refreshComponent');
+    }
+
+    public function updatedSelectAll($value): void
+    {
+        $this->selected = $value
+            ? $this->model::pluck('id')->toArray()
+            : [];
+    }
+
+    public function confirmDelete($id): void
+    {
+        $this->dispatch('swal:confirm', [
+            'id'    => $id,
+            'title' => 'هل أنت متأكد؟',
+            'text'  => 'لن يمكنك التراجع بعد الحذف!',
+            'type'  => 'single',
+        ]);
+    }
+
+    public function confirmDeleteSelected(): void
+    {
+        if (empty($this->selected)) {
+
+            $this->dispatch('swal:error', [
+                'title' => 'لم يتم التحديد',
+                'text'  => 'يرجى تحديد عناصر للحذف أولاً.',
+            ]);
+
+            return;
+        }
+
+        $this->dispatch('swal:confirm', [
+            'type'  => 'bulk',
+            'title' => 'هل أنت متأكد؟',
+            'text'  => 'سيتم حذف ' . count($this->selected) . ' عنصر.',
+        ]);
+    }
+
+    public function deleteSelected(): void
+    {
+        if (empty($this->selected)) {
+            return;
+        }
+
+        $this->model::whereIn('id', $this->selected)->delete();
+
+        $this->selected = [];
+        $this->selectAll = false;
+
+        $this->dispatch('swal:success', [
+            'title' => 'تم الحذف',
+            'text'  => 'تم حذف العناصر المحددة بنجاح',
+        ]);
+
+        $this->dispatch('refreshComponent');
+    }
+}
