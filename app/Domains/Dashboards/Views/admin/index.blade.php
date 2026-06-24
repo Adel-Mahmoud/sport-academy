@@ -10,7 +10,28 @@
 @can('view dashboard')
 <div class="container my-5" dir="rtl">
     <div class="row">
-        <!-- 1. الاشتراكات المنتهية -->
+        <div class="col-3 mb-4">
+            <div class="card h-100 border-0 shadow-sm pr-3">
+                <div class="d-flex justify-content-start align-items-center">
+                    <div class="bg-primary-subtle text-primary rounded-3">
+                        <i class="fas fa-calendar fa-3x"></i>
+                    </div>
+                    <div class="mr-3">
+                        <h3 class="font-weight-normal mb-1">الاربعاء</h3>
+                        <span class="text-muted small">
+                            15 مايو 2024
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 mb-4">
+            <div class="h-100 border-0 p-3">
+hjkj
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -30,7 +51,6 @@
             </div>
         </div>
 
-        <!-- 2. الاشتراكات النشطة -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -50,7 +70,6 @@
             </div>
         </div>
 
-        <!-- 3. إجمالي اللاعبين -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -70,7 +89,6 @@
             </div>
         </div>
 
-        <!-- 4. مصروفات الشهر -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -90,7 +108,6 @@
             </div>
         </div>
 
-        <!-- 5. إيرادات الشهر -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -110,7 +127,6 @@
             </div>
         </div>
 
-        <!-- 6. غياب اليوم -->
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -151,7 +167,6 @@
                         </div>
                     </div>
 
-                    <!-- الشخص الثاني -->
                     <div class="d-flex align-items-center p-2 mb-2 border-bottom last-border-0">
                         <img src="http://127.0.0.1:8000/assets/img/faces/6.jpg" class="rounded-circle ml-3" alt="صورة المستخدم" width="45" height="45">
                         <div>
@@ -162,7 +177,6 @@
                         </div>
                     </div>
 
-                    <!-- الشخص الثالث -->
                     <div class="d-flex align-items-center p-2 mb-2 border-bottom last-border-0">
                         <img src="http://127.0.0.1:8000/assets/img/faces/6.jpg" class="rounded-circle ml-3" alt="صورة المستخدم" width="45" height="45">
                         <div>
@@ -175,7 +189,6 @@
 
                 </div>
 
-                <!-- أسفل البطاقة -->
                 <div class="mt-auto pt-2 text-left">
                     <a href="#" class="btn btn-sm btn-block border btn-link text-primary font-weight-bold p-2">
                         عرض جميع الغياب 
@@ -239,12 +252,8 @@
 
                 <div class="absent-list">
                     
-                <!-- الصندوق الحاوي: يوزع العناصر أقصى اليمين وأقصى اليسار ويحاذيها عمودياً في المنتصف -->
                     <div class="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom last-border-0">
-                        
-                        <!-- القسم الأيمن: الصورة والبيانات بجانب بعضهما -->
                         <div class="d-flex align-items-center">
-                            <!-- الصورة أقصى اليمين مع مسافة يسارها -->
                             <img src="http://127.0.0.1:8000/assets/img/faces/6.jpg" class="rounded-circle ml-3" alt="صورة المستخدم" width="45" height="45">
                             <div>
                                 <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
@@ -254,16 +263,43 @@
                             </div>
                         </div>
                         
-                        <!-- القسم الأيسر: البادج أو مربع الأيام أقصى اليسار -->
                         <div class="bg-warning-subtle text-warning px-3 py-2 rounded font-weight-bold small">
                             3 أيام
                         </div>
-
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom last-border-0">
+                        <div class="d-flex align-items-center">
+                            <img src="http://127.0.0.1:8000/assets/img/faces/6.jpg" class="rounded-circle ml-3" alt="صورة المستخدم" width="45" height="45">
+                            <div>
+                                <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
+                                <span class="text-danger small font-weight-normal">
+                                    <i class="fas fa-user-times mr-1"></i> باقي: <strong>7 أيام</strong>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-warning-subtle text-warning px-3 py-2 rounded font-weight-bold small">
+                            3 أيام
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom last-border-0">
+                        <div class="d-flex align-items-center">
+                            <img src="http://127.0.0.1:8000/assets/img/faces/6.jpg" class="rounded-circle ml-3" alt="صورة المستخدم" width="45" height="45">
+                            <div>
+                                <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
+                                <span class="text-danger small font-weight-normal">
+                                    <i class="fas fa-user-times mr-1"></i> باقي: <strong>7 أيام</strong>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-warning-subtle text-warning px-3 py-2 rounded font-weight-bold small">
+                            3 أيام
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- أسفل البطاقة -->
                 <div class="mt-auto pt-2 text-left">
                     <a href="#" class="btn btn-sm btn-block border btn-link text-primary font-weight-bold p-2">
                         عرض جميع الاشتراكات 
@@ -277,87 +313,86 @@
     </div>
     
     <div class="row">
-        <div class="card">
-        <div class="card h-100 border-0 shadow-sm p-3">
-    <!-- عنوان قسم الأنشطة -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h4 class="font-weight-bold mb-0 text-dark">آخر الأنشطة</h4>
-        <i class="fas fa-history text-muted"></i>
-    </div>
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card h-100 border-0 shadow-sm p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="font-weight-bold mb-0 text-dark">آخر الأنشطة</h4>
+                        <i class="fas fa-history text-muted"></i>
+                    </div>
 
-    <!-- قائمة الأنشطة -->
-    <div class="activity-timeline">
+                    <div class="activity-timeline">
 
-        <!-- النشاط 1: اشتراك جديد -->
-        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
-            <!-- القسم الأيمن: الأيقونة مع النصوص -->
-            <div class="d-flex align-items-start">
-                <!-- أيقونة النشاط بخلفية خفيفة دائرية -->
-                <div class="bg-success-subtle text-success p-2 rounded-circle ml-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                    <i class="fas fa-user-plus small"></i>
-                </div>
-                <div>
-                    <h6 class="font-weight-bold mb-1 text-dark">تسجيل لاعب جديد</h6>
-                    <p class="text-muted small mb-0">تم تسجيل الكابتن محمد علي في باقة الاشتراكات الذهبية.</p>
-                </div>
-            </div>
-            <!-- القسم الأيسر: المدة الزمنية -->
-            <div class="text-left">
-                <span class="text-secondary small font-weight-normal text-nowrap">منذ 10 دقائق</span>
-            </div>
-        </div>
+                        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-secondary-subtle text-secondary p-2 ml-3 rounded">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="font-weight-bold mb-1 text-dark">تسجيل لاعب جديد</h6>
+                                    <p class="text-muted small mb-0">تم تسجيل الكابتن محمد علي في باقة الاشتراكات الذهبية.</p>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-secondary small font-weight-normal text-nowrap">منذ 10 دقائق</span>
+                            </div>
+                        </div>
 
-        <!-- النشاط 2: تجديد اشتراك -->
-        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
-            <div class="d-flex align-items-start">
-                <div class="bg-primary-subtle text-primary p-2 rounded-circle ml-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                    <i class="fas fa-sync-alt small"></i>
-                </div>
-                <div>
-                    <h6 class="font-weight-bold mb-1 text-dark">تجديد اشتراك شهري</h6>
-                    <p class="text-muted small mb-0">قام اللاعب أحمد حسين بتجديد اشتراك صالة الحديد والياقة.</p>
-                </div>
-            </div>
-            <div class="text-left">
-                <span class="text-secondary small font-weight-normal text-nowrap">منذ ساعتين</span>
-            </div>
-        </div>
+                        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-secondary-subtle text-secondary p-2 ml-3 rounded">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="font-weight-bold mb-1 text-dark">تجديد اشتراك شهري</h6>
+                                    <p class="text-muted small mb-0">قام اللاعب أحمد حسين بتجديد اشتراك صالة الحديد والياقة.</p>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-secondary small font-weight-normal text-nowrap">منذ ساعتين</span>
+                            </div>
+                        </div>
 
-        <!-- النشاط 3: تسجيل غياب أو إنذار -->
-        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
-            <div class="d-flex align-items-start">
-                <div class="bg-danger-subtle text-danger p-2 rounded-circle ml-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                    <i class="fas fa-exclamation-triangle small"></i>
-                </div>
-                <div>
-                    <h6 class="font-weight-bold mb-1 text-dark">تجاوز حد الغياب</h6>
-                    <p class="text-muted small mb-0">تنبيه: اللاعب عمر خالد تخطى 5 أيام غياب متتالية.</p>
-                </div>
-            </div>
-            <div class="text-left">
-                <span class="text-secondary small font-weight-normal text-nowrap">منذ 3 أيام</span>
-            </div>
-        </div>
+                        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-secondary-subtle text-secondary p-2 ml-3 rounded">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="font-weight-bold mb-1 text-dark">تجاوز حد الغياب</h6>
+                                    <p class="text-muted small mb-0">تنبيه: اللاعب عمر خالد تخطى 5 أيام غياب متتالية.</p>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-secondary small font-weight-normal text-nowrap">منذ 3 أيام</span>
+                            </div>
+                        </div>
 
-        <!-- النشاط 4: عملية دفع مصروفات -->
-        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
-            <div class="d-flex align-items-start">
-                <div class="bg-warning-subtle text-warning p-2 rounded-circle ml-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                    <i class="fas fa-receipt small"></i>
+                        <div class="d-flex justify-content-between align-items-start p-2 mb-3 border-bottom last-border-0">
+                            <div class="d-flex align-items-start">
+                                <div class="bg-secondary-subtle text-secondary p-2 ml-3 rounded">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h6 class="font-weight-bold mb-1 text-dark">تسجيل مصروفات جديدة</h6>
+                                    <p class="text-muted small mb-0">تم دفع فاتورة صيانة المعدات الرياضية الدورية.</p>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <span class="text-secondary small font-weight-normal text-nowrap">منذ أسبوع</span>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div>
-                    <h6 class="font-weight-bold mb-1 text-dark">تسجيل مصروفات جديدة</h6>
-                    <p class="text-muted small mb-0">تم دفع فاتورة صيانة المعدات الرياضية الدورية.</p>
+
+                <div class="mt-auto pt-2 text-left">
+                    <a href="#" class="btn btn-sm btn-block border btn-link text-primary font-weight-bold p-2">
+                        عرض كل الانشطة 
+                        <i class="fas fa-arrow-left mr-1"></i>
+                    </a>
                 </div>
             </div>
-            <div class="text-left">
-                <span class="text-secondary small font-weight-normal text-nowrap">منذ أسبوع</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-
         </div>
     </div>
 </div>
@@ -371,13 +406,9 @@
 @endsection
 
 @section('js')
-<!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-<!--Internal  Chart.bundle js -->
 <script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
-<!-- Internal Select2 js-->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-<!--Internal Chartjs js -->
 <script>
     /* LINE CHART */
 	var ctx8 = document.getElementById('chartLine1');
