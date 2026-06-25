@@ -22,7 +22,6 @@ class SettingRepository
         $model = Setting::first();
 
         if ($model) {
-            // لو فيه لوجو جديد، احذف القديم
             if (isset($data['logo']) && $model->logo && Storage::disk('public')->exists($model->logo)) {
                 Storage::disk('public')->delete($model->logo);
             }

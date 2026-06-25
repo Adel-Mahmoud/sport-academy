@@ -10,29 +10,33 @@
 @can('view dashboard')
 <div class="container my-5" dir="rtl">
     <div class="row">
-        <div class="col-3 mb-4">
-            <div class="card h-100 border-0 shadow-sm pr-3">
-                <div class="d-flex justify-content-start align-items-center">
-                    <div class="bg-primary-subtle text-primary rounded-3">
-                        <i class="fas fa-calendar fa-3x"></i>
-                    </div>
-                    <div class="mr-3">
+        <div class="col-6 col-md-9 col-lg-9 mb-4">
+            <div class="h-100 border-0 p-3">
+                <div class="text-right mb-3">
+                    <h4 class="font-weight-bold mb-2 text-dark">مرحبا بك في لوحة التحكم</h4>
+                    <span class="text-muted small">آخر تحديث: 15 مايو 2024</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3 col-lg-3 mb-4">
+            <div class="card h-100 border-0 shadow-sm pl-3 pt-3">
+                <div class="d-flex justify-content-end align-items-center">
+                    <div class="text-center w-100">
                         <h3 class="font-weight-normal mb-1">الاربعاء</h3>
                         <span class="text-muted small">
                             15 مايو 2024
                         </span>
                     </div>
+
+                    <div class="bg-pink-subtle text-danger p-3 rounded-3">
+                        <i class="fas fa-calendar fa-2x"></i>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-9 mb-4">
-            <div class="h-100 border-0 p-3">
-hjkj
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -51,7 +55,7 @@ hjkj
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -70,7 +74,7 @@ hjkj
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -89,7 +93,7 @@ hjkj
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -108,7 +112,7 @@ hjkj
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -127,7 +131,7 @@ hjkj
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-6 col-md-6 col-lg-4 mb-4">
             <div class="card h-100 border-0 shadow-sm p-3">
                 <div class="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -300,7 +304,7 @@ hjkj
 
                 </div>
 
-                <div class="mt-auto pt-2 text-left">
+                <div class="mt-auto p-2 text-left">
                     <a href="#" class="btn btn-sm btn-block border btn-link text-primary font-weight-bold p-2">
                         عرض جميع الاشتراكات 
                         <i class="fas fa-arrow-left mr-1"></i>

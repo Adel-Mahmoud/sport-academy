@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Domains\Players\Actions;
-
-use App\Domains\Players\DTOs\CreatePlayerData;
 use App\Domains\Players\Models\Player;
-use App\Domains\Players\Repositories\PlayerRepository;
+use App\Domains\Players\Services\PlayerService;
 
 class CreatePlayerAction
 {
-    public function __construct(
-        private readonly PlayerRepository $repository,
-    ) {
+    protected $playerService;
+
+    public function __construct(PlayerService $playerService)
+    {
+        $this->playerService = $playerService;
     }
 
-    public function execute(CreatePlayerData $data): Player
+    public function execute(array $data): Player
     {
-        return $this->repository->create($data->toArray());
+        if (isset($data['image'])) {
+            $data['image'] = $data['image']->store('players', 'public');
+        }
+
+        return $this->playerService->registerPlayerWithUser($data);
     }
 }

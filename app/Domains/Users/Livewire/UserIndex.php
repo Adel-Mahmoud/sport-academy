@@ -47,7 +47,7 @@ class UserIndex extends BaseTableComponent
                 $query->where('name', 'like', "%{$this->search}%")
                     ->orWhere('email', 'like', "%{$this->search}%");
             })
-            ->paginate(1);
+            ->paginate(10);
 
         return view('users::livewire.user-index', compact('users'));
     }

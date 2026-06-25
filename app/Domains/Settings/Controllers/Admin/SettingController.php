@@ -5,7 +5,6 @@ namespace App\Domains\Settings\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Domains\Settings\Repositories\SettingRepository;
 use App\Domains\Settings\Requests\SettingRequest;
-use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
@@ -33,7 +32,7 @@ class SettingController extends Controller
 
         if ($request->hasFile('logo')) {
             $validated['logo'] = $request->file('logo')->store('settings', 'public');
-        }
+        } 
 
         if ($request->hasFile('brand_image')) {
             $validated['brand_image'] = $request->file('brand_image')->store('settings', 'public');

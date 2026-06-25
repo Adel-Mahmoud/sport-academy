@@ -38,7 +38,6 @@
                             </th>
                             <th>#</th>
                             <th>اسم الرياضة</th>
-                            <th>رقم الفرع (Branch ID)</th>
                             <th>الحالة</th>
                             <th>تاريخ الإنشاء</th>
                             <th width="150">الإجراءات</th>
@@ -55,13 +54,6 @@
                             </td>
                             <td>{{ $loop->iteration + ($sports->currentPage() - 1) * $sports->perPage() }}</td>
                             <td>{{ $sport->name }}</td>
-                            <td>
-                                @if($sport->branch_id)
-                                <span class="badge bg-secondary">{{ $sport->branch_id }}</span>
-                                @else
-                                <span class="text-muted">—</span>
-                                @endif
-                            </td>
                             <td>
                                 @if($sport->status == 'active')
                                 <span class="badge bg-success">نشط</span>

@@ -4,6 +4,7 @@ namespace App\Domains\Users\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Domains\Users\Repositories\UserRepository;
+use App\Domains\Users\Services\UserService;
 use App\Domains\Users\Requests\UserRequest;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
@@ -12,10 +13,12 @@ use Illuminate\View\View;
 class UserController extends Controller
 {
     protected UserRepository $repository;
+    protected UserService $userService;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, UserService $userService)
     {
         $this->repository = $repository;
+        $this->userService = $userService;
         // Permissions
         $this->middleware('permission:view users')->only(['index']);
         $this->middleware('permission:create user')->only(['create', 'store']);
@@ -39,7 +42,7 @@ class UserController extends Controller
 
     public function store(UserRequest $request): RedirectResponse
     {
-        $this->repository->create($request->validated());
+        $this->userService->registerUser($request->validated());
 
         return redirect()
             ->route('admin.users.index')
