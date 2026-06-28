@@ -19,14 +19,21 @@ class RegisterPlayerUseCase
     {
         return DB::transaction(function () use ($data, $tempImagePath) {
 
-            $user = $this->userService->registerUser(
-                new CreateUserData(
-                    name: $data['name'],
-                    email: $data['email'],
-                    password: $data['password'],
-                    roles: ['player']
-                )
-            );
+        //     $user = $this->userService->registerUser(
+        //         new CreateUserData::fromArray(
+        //             name: $data['name'],
+        //             email: $data['email'],
+        //             password: $data['password'],
+        //             roles: ['player']
+        //         )
+        //     );
+
+
+        // $dto = CreateUserData::fromArray($data);
+            $data['roles'] = ['player'];
+            $user = $this->userService->registerUser(CreateUserData::fromArray($data));
+
+
             if (! $user->exists) {
                 throw new \Exception('Player creation failed');
             } else {

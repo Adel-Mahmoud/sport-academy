@@ -45,7 +45,7 @@ class UserController extends Controller
     {
         $dto = CreateUserData::fromArray($request->validated());
 
-        $user = $this->userService->registerUser($dto);
+        $this->userService->registerUser($dto);
 
         return redirect()
             ->route('admin.users.index')
