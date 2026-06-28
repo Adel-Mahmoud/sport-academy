@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<x-page-header titlePage="الرئيسية" />
+<x-page-header/>
 
 @section('css')
 <link href="{{URL::asset('assets/plugins/morris.js/morris.css')}}" rel="stylesheet">
@@ -11,7 +11,7 @@
 <div class="container my-5" dir="rtl">
     <div class="row">
         <div class="col-6 col-md-9 col-lg-9 mb-4">
-            <div class="h-100 border-0 p-3">
+            <div class="h-100 border-0 pt-0">
                 <div class="text-right mb-3">
                     <h4 class="font-weight-bold mb-2 text-dark">مرحبا بك في لوحة التحكم</h4>
                     <span class="text-muted small">آخر تحديث: 15 مايو 2024</span>
@@ -44,7 +44,7 @@
                         <span class="text-muted small">الاشتراكات المنتهية</span>
                     </div>
                     <div class="bg-danger-subtle text-danger p-3 rounded-3">
-                        <i class="fas fa-user-times fa-3x"></i>
+                        <i class="fas fa-user-times fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -63,7 +63,7 @@
                         <span class="text-muted small">الاشتراكات النشطة</span>
                     </div>
                     <div class="bg-success-subtle text-success p-3 rounded-3">
-                        <i class="fas fa-user-check fa-3x"></i>
+                        <i class="fas fa-user-check fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -82,7 +82,7 @@
                         <span class="text-muted small">إجمالي اللاعبين</span>
                     </div>
                     <div class="bg-primary-subtle text-primary p-3 rounded-3">
-                        <i class="fas fa-users fa-3x"></i>
+                        <i class="fas fa-users fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -101,7 +101,7 @@
                         <span class="text-muted small">مصروفات الشهر</span>
                     </div>
                     <div class="bg-warning-subtle text-warning p-3 rounded-3">
-                        <i class="fas fa-money-bill-wave fa-3x"></i>
+                        <i class="fas fa-money-bill-wave fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -120,7 +120,7 @@
                         <span class="text-muted small">إيرادات الشهر</span>
                     </div>
                     <div class="bg-info-subtle text-info p-3 rounded-3">
-                        <i class="fas fa-wallet fa-3x"></i>
+                        <i class="fas fa-wallet fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -139,7 +139,7 @@
                         <span class="text-muted small">غياب اليوم</span>
                     </div>
                     <div class="bg-secondary-subtle text-secondary p-3 rounded-3">
-                        <i class="fas fa-user-slash fa-3x"></i>
+                        <i class="fas fa-user-slash fa-2x"></i>
                     </div>
                 </div>
                 <div class="mt-auto pt-2 border-top">
@@ -390,7 +390,7 @@
                     </div>
                 </div>
 
-                <div class="mt-auto pt-2 text-left">
+                <div class="mt-auto p-2 text-left">
                     <a href="#" class="btn btn-sm btn-block border btn-link text-primary font-weight-bold p-2">
                         عرض كل الانشطة 
                         <i class="fas fa-arrow-left mr-1"></i>

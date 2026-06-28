@@ -19,7 +19,7 @@
         <div class="col-md-6 mb-3">
             <label class="form-label">رقم الفرع (Branch ID)</label>
             <input type="number" name="branch_id" class="form-control"
-                value="{{ old('branch_id', $sport->branch_id) }}">
+                value="{{ old('branch_id', $sport->branch_id) }}" disabled>
             @error('branch_id') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 

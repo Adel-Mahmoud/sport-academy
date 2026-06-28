@@ -4,6 +4,7 @@ namespace App\Domains\Players\Livewire;
 
 use App\Domains\Players\Models\Player; 
 use App\Livewire\BaseTableComponent;
+use Illuminate\Support\Facades\Storage;
 
 class PlayersIndex extends BaseTableComponent
 {
@@ -15,6 +16,13 @@ class PlayersIndex extends BaseTableComponent
         'refreshComponent' => '$refresh',
     ];
 
+    protected function beforeDelete($model): void
+    {
+        if ($model->image && Storage::disk('public')->exists($model->image)) {
+            Storage::disk('public')->delete($model->image);
+        }
+    }
+    
     public function render()
     {
         $players = $this->model::query()

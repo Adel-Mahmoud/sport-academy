@@ -24,9 +24,12 @@ return [
     ],
     [
         'label'  => 'اللاعبين',
-        'type'   => 'link',
+        'type'   => 'dropdown',
         'icon'   => '<i class="fas fa-users fa-lg menu-icon"></i>',
-        'url'    => '/admin/players',
+        'children' => [
+            ['label' => 'عرض الكل', 'url' => '/admin/players'],
+            ['label' => 'إضافة جديد', 'url' => '/admin/players/create'],
+        ],
         // 'can'    => 'view players',
     ],
     [

@@ -4,7 +4,6 @@ namespace App\Domains\Auth\Models;
 
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
-use App\Domains\Doctors\Models\DoctorEntity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable

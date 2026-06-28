@@ -1,6 +1,12 @@
 @extends('layouts.master',['titlePage'=>$titlePage])
 <x-page-header :sectionPage="$sectionPage" :titlePage="$titlePage" />
 
+
+@section('css')
+<link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <x-form
     :action="route('admin.players.store')"
@@ -63,13 +69,23 @@
             @error('height') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-3">
             <label class="form-label">فصيلة الدم</label>
-            <input type="text" name="blood_type" class="form-control" value="{{ old('blood_type') }}">
+            <select name="blood_type" class="form-control">
+                <option value="">اختر فصيلة الدم</option>
+                <option value="A+" {{ old('blood_type') == 'A+' ? 'selected' : '' }}>A+</option>
+                <option value="A-" {{ old('blood_type') == 'A-' ? 'selected' : '' }}>A-</option>
+                <option value="B+" {{ old('blood_type') == 'B+' ? 'selected' : '' }}>B+</option>
+                <option value="B-" {{ old('blood_type') == 'B-' ? 'selected' : '' }}>B-</option>
+                <option value="AB+" {{ old('blood_type') == 'AB+' ? 'selected' : '' }}>AB+</option>
+                <option value="AB-" {{ old('blood_type') == 'AB-' ? 'selected' : '' }}>AB-</option>
+                <option value="O+" {{ old('blood_type') == 'O+' ? 'selected' : '' }}>O+</option>
+                <option value="O-" {{ old('blood_type') == 'O-' ? 'selected' : '' }}>O-</option>
+            </select>
             @error('blood_type') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-3">
             <label class="form-label">الجنس</label>
             <select name="gender" class="form-control" required>
                 <option value="">اختر الجنس</option>
@@ -79,15 +95,9 @@
             @error('gender') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="col-md-6 mb-3">
-            <label class="form-label">الموقع (Location)</label>
-            <input type="text" name="location" class="form-control" value="{{ old('location') }}">
-            @error('location') <span class="text-danger">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
+        <div class="col-md-12 mb-3">
             <label class="form-label">الصورة الشخصية</label>
-            <input type="file" name="image" class="form-control">
+            <input type="file" name="image" class="form-control dropify" accept="image/*" data-height="150"> 
             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
@@ -105,4 +115,11 @@
 
     </div>
 </x-form>
+@endsection
+
+@section('js')
+ <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+ <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+ <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+ <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
 @endsection

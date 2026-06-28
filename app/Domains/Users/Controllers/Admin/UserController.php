@@ -8,6 +8,7 @@ use App\Domains\Users\Services\UserService;
 use App\Domains\Users\Requests\UserRequest;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
+use App\Domains\Users\DTOs\CreateUserData;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -40,9 +41,11 @@ class UserController extends Controller
         return view('users::admin.create', compact('sectionPage', 'titlePage', 'roles'));
     }
 
-    public function store(UserRequest $request): RedirectResponse
+    public function store(UserRequest $request)
     {
-        $this->userService->registerUser($request->validated());
+        $dto = CreateUserData::fromArray($request->validated());
+
+        $user = $this->userService->registerUser($dto);
 
         return redirect()
             ->route('admin.users.index')

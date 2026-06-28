@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
+
     protected $fillable = [
         'name',
         'user_id',
@@ -25,6 +26,6 @@ class Player extends Model
 
     public function user()
     {
-        return $this->belongsTo(\App\Domains\Users\Models\User::class);
+        return $this->belongsTo(\App\Domains\Auth\Models\Admin::class, 'user_id');
     }
 }

@@ -3,21 +3,18 @@
 namespace App\Domains\Users\Services;
 
 use Illuminate\Support\Facades\Hash;
-use App\Domains\Auth\Models\Admin as User;
+use App\Domains\Auth\Models\Admin;
+use App\Domains\Users\DTOs\CreateUserData;
 
 class UserService
 {
-    public function registerUser(array $data): User
+    public function registerUser(CreateUserData $data): Admin
     {
-        $user = User::create([
-                'name'     => $data['name'],
-                'email'    => $data['email'],
-                'password' => Hash::make($data['password']), 
-            ]);
-
-            if (isset($data['roles'])) {
-                $user->syncRoles($data['roles']);
-            }
+        $user = Admin::create([
+            'name'     => $data->name,
+            'email'    => $data->email,
+            'password' => Hash::make($data->password),
+        ]);
 
         return $user;
     }

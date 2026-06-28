@@ -4,8 +4,9 @@ namespace App\Domains\Players\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 use App\Domains\Players\Requests\StorePlayerRequest;
-use App\Domains\Players\Actions\CreatePlayerAction;
+use App\Domains\Players\UseCases\RegisterPlayerUseCase;
 
 class PlayerController extends Controller
 {
@@ -22,10 +23,18 @@ class PlayerController extends Controller
         return view('players::admin.create', compact('sectionPage', 'titlePage'));
     }
 
-    public function store(StorePlayerRequest $request, CreatePlayerAction $createPlayerAction)
+    public function store(StorePlayerRequest $request, RegisterPlayerUseCase $useCase)
     {
-        $createPlayerAction->execute($request->validated());
+        $data = $request->validated();
 
+        $tempPath = null;
+
+        if ($request->hasFile('image')) {
+            $tempPath = $request->file('image')->store('temp', 'public');
+        }
+
+        $useCase->execute($data, $tempPath);
+        
         return redirect()
             ->route('admin.players.index')
             ->with('swal', [

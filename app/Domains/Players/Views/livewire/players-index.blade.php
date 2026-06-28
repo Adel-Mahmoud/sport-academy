@@ -60,7 +60,7 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     @if($player->image)
-                                        <img src="{{ asset('storage/' . $player->image) }}" class="rounded-circle me-2" width="35" height="35" alt="">
+                                        <img src="{{ asset('storage/' . $player->image) }}" class="rounded-circle me-2 ml-2" width="35" height="35" alt="">
                                     @else
                                         <i class="fas fa-user-circle fa-2x text-muted me-2"></i>
                                     @endif

@@ -6,4 +6,5 @@ return [
     App\Providers\SettingsServiceProvider::class,
     App\Providers\AuthServiceProvider::class,
     Maatwebsite\Excel\ExcelServiceProvider::class,
+    App\Providers\EventServiceProvider::class,
 ];

@@ -1,13 +1,13 @@
-@props(['sectionPage' => null, 'titlePage' => 'Title Page'])
+@props(['sectionPage' => null, 'titlePage' => null ])
 
 @section('page-header')
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            @if($sectionPage)
+            @if(isset($sectionPage) && !empty($sectionPage) && isset($titlePage) && !empty($titlePage))
                 <h4 class="content-title mb-0 my-auto">{{ $sectionPage }}</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ $titlePage }}</span>
-            @else
+            @elseif(isset($titlePage) && !empty($titlePage))
                 <h4 class="content-title mb-0 my-auto">{{ $titlePage }}</h4>
             @endif
         </div>

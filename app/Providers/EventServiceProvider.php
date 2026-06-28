@@ -8,7 +8,11 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-    protected $listen = [];
+    protected $listen = [
+        \App\Domains\Players\Events\PlayerCreated::class => [
+            \App\Domains\Players\Listeners\UploadPlayerImage::class,
+        ],
+    ];
 }
 
 

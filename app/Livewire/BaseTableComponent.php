@@ -26,9 +26,18 @@ abstract class BaseTableComponent extends Component
         $this->resetPage();
     }
 
+    protected function beforeDelete($model): void
+    {
+        //
+    }
+
     public function deleteItem($id): void
     {
-        $this->model::findOrFail($id)->delete();
+        $model = $this->model::findOrFail($id);
+        
+        $this->beforeDelete($model);
+
+        $model->delete();
 
         $this->dispatch('swal:success', [
             'title' => 'تم الحذف!',
@@ -78,6 +87,12 @@ abstract class BaseTableComponent extends Component
     {
         if (empty($this->selected)) {
             return;
+        }
+        
+        $models = $this->model::whereIn('id', $this->selected)->get();
+
+        foreach ($models as $model) {
+            $this->beforeDelete($model);
         }
 
         $this->model::whereIn('id', $this->selected)->delete();

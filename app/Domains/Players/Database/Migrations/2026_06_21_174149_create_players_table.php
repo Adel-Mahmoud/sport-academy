@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('phone')->nullable();
             $table->string('school')->nullable();
             $table->float('weight')->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('national_id')->nullable()->unique(); 
+            $table->string('national_id')->nullable()->unique();
             $table->timestamps();
         });
     }
