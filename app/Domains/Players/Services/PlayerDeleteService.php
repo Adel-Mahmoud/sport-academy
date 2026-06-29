@@ -16,11 +16,10 @@ class PlayerDeleteService
     {
         DB::transaction(function () use ($player) {
 
-            $player = $player->fresh();
-
             if ($player->image) {
                 $this->imageService->delete($player);
             }
+
             $player->delete();
         });
     }

@@ -41,7 +41,6 @@ abstract class BaseTableComponent extends Component
 
         if (method_exists($this, 'handleDelete')) {
             $this->handleDelete($model);
-            return;
         }
 
         if (method_exists($model, 'beforeDelete')) {
@@ -104,16 +103,18 @@ abstract class BaseTableComponent extends Component
             return;
         }
 
-        $models = $this->model::whereIn('id', $this->selected)->get();
+        $models = $this->model::whereIn('id', $this->selected)->with('player')->get();
 
         foreach ($models as $model) {
+
             if (!$this->beforeDelete($model)) {
                 continue;
             }
 
-            if (method_exists($model, 'handleDelete')) {
-                $this->handleDelete($model);
-                continue;
+            $player = $model->player; 
+
+            if (method_exists($this, 'handleDelete')) {
+                $this->handleDelete($model, $player);
             }
 
             $model->delete();
