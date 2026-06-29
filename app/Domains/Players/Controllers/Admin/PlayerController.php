@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use App\Shared\Services\ImageService;
 use App\Domains\Players\Requests\StorePlayerRequest;
+use App\Domains\Players\Requests\UpdatePlayerRequest;
 use App\Domains\Players\UseCases\RegisterPlayerUseCase;
 use App\Domains\Players\UseCases\GetPlayerUseCase;
+use App\Domains\Players\UseCases\UpdatePlayerUseCase;
 
 class PlayerController extends Controller
 {
@@ -54,6 +56,32 @@ class PlayerController extends Controller
         $sectionPage = 'اللاعبين';
         return view('players::admin.edit', compact('player', 'sectionPage', 'titlePage'));
     }
+
+    public function update(
+        UpdatePlayerRequest $request,
+        int $id,
+        UpdatePlayerUseCase $useCase,
+        ImageService $imageService
+    ) {
+        $player = $useCase->execute($request->validated(), $id);
+
+        if ($request->hasFile('image')) {
+            $imageService->update(
+                $player,
+                $request->file('image'),
+                'players'
+            );
+        }
+
+        return redirect()
+            ->route('admin.players.index')
+            ->with('swal', [
+                'type'  => 'success',
+                'title' => 'تم التعديل!',
+                'text'  => 'تم تعديل البيانات بنجاح.',
+            ]);
+    }
+
     /*
         \\\ on update player
         if ($request->hasFile('image')) {
