@@ -1,53 +1,146 @@
-@extends('admin.layouts.app')
+@extends('layouts.master',['titlePage'=>$titlePage])
+
+<x-page-header :sectionPage="$sectionPage" :titlePage="$titlePage" />
+
+@section('css')
+<link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
+@endsection
 
 @section('content')
-<div class="container py-4">
-    <h1 class="mb-4">Edit Player</h1>
 
-    @if(session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
-    @endif
+<x-form
+    :action="route('admin.players.update', $player->id)"
+    submitLabel="تعديل بيانات اللاعب"
+    cancelRoute="admin.players.index"
+    enctype="multipart/form-data"
+>
 
-    <form method="POST" action="{{ route('admin.players.update', $player->id) }}">
-        @csrf
-        @method('PUT')
+    @method('PUT')
 
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" value="{{ old('name', $player->name) }}" class="form-control">
-            @error('name')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الاسم</label>
+            <input type="text" name="name" class="form-control"
+                   value="{{ old('name', $player->name) }}" required>
+            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" value="{{ old('email', $player->email) }}" class="form-control">
-            @error('email')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+        <div class="col-md-6 mb-3">
+            <label class="form-label">البريد الإلكتروني</label>
+            <input type="email" name="email" class="form-control"
+                   value="{{ old('email', $player->user->email) }}" required>
+            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="position" class="form-label">Position</label>
-            <input type="text" id="position" name="position" value="{{ old('position', $player->position) }}" class="form-control">
-            @error('position')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+        <div class="col-md-6 mb-3">
+            <label class="form-label">كلمة المرور (اختياري)</label>
+            <input type="password" name="password" class="form-control">
+            @error('password') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="team" class="form-label">Team</label>
-            <input type="text" id="team" name="team" value="{{ old('team', $player->team) }}" class="form-control">
-            @error('team')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الهاتف</label>
+            <input type="text" name="phone" class="form-control"
+                   value="{{ old('phone', $player->phone) }}" required>
+            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <div class="d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Update Player</button>
-            <a href="{{ route('admin.players.index') }}" class="btn btn-secondary">Cancel</a>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">المدرسة</label>
+            <input type="text" name="school" class="form-control"
+                   value="{{ old('school', $player->school) }}">
+            @error('school') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-    </form>
-</div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الهوية الوطنية</label>
+            <input type="text" name="national_id" class="form-control"
+                   value="{{ old('national_id', $player->national_id) }}" required>
+            @error('national_id') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">العمر</label>
+            <input type="number" name="age" class="form-control"
+                   value="{{ old('age', $player->age) }}" required>
+            @error('age') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">الوزن</label>
+            <input type="number" step="0.1" name="weight" class="form-control"
+                   value="{{ old('weight', $player->weight) }}">
+            @error('weight') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="form-label">الطول</label>
+            <input type="number" step="0.1" name="height" class="form-control"
+                   value="{{ old('height', $player->height) }}">
+            @error('height') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">فصيلة الدم</label>
+            <select name="blood_type" class="form-control">
+                <option value="">اختر فصيلة الدم</option>
+                @foreach(['A+','A-','B+','B-','AB+','AB-','O+','O-'] as $type)
+                    <option value="{{ $type }}"
+                        {{ old('blood_type', $player->blood_type) == $type ? 'selected' : '' }}>
+                        {{ $type }}
+                    </option>
+                @endforeach
+            </select>
+            @error('blood_type') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الجنس</label>
+            <select name="gender" class="form-control" required>
+                <option value="">اختر الجنس</option>
+                <option value="male" {{ old('gender', $player->gender) == 'male' ? 'selected' : '' }}>ذكر</option>
+                <option value="female" {{ old('gender', $player->gender) == 'female' ? 'selected' : '' }}>أنثى</option>
+            </select>
+            @error('gender') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label class="form-label">الصورة الشخصية</label>
+
+            @if($player->image)
+                <div class="mb-2">
+                    <img src="{{ asset('storage/' . $player->image) }}" width="120" height="120" style="object-fit: cover;">
+                </div>
+            @endif
+
+            <input type="file" name="image" class="form-control dropify" accept="image/*" data-height="150">
+
+            @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label class="form-label">العنوان</label>
+            <textarea name="address" rows="2" class="form-control">{{ old('address', $player->address) }}</textarea>
+            @error('address') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label class="form-label">الوصف</label>
+            <textarea name="description" rows="3" class="form-control">{{ old('description', $player->description) }}</textarea>
+            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+    </div>
+
+</x-form>
+
+@endsection
+
+@section('js')
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
 @endsection

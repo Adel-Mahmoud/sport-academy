@@ -5,14 +5,17 @@ namespace App\Domains\Players\UseCases;
 use Illuminate\Support\Facades\DB;
 use App\Domains\Players\Models\Player;
 use App\Domains\Users\Services\UserService;
+use App\Domains\Players\DTOs\CreatePlayerData;
+use App\Domains\Players\Repositories\PlayerRepository;
 use App\Domains\Users\DTOs\CreateUserData;
-use App\Domains\Players\Events\PlayerCreated;
 use Spatie\Permission\Models\Role;
 
 class RegisterPlayerUseCase
 {
     public function __construct(
-        protected UserService $userService
+        protected UserService $userService,
+        protected PlayerRepository $playerRepository,
+        protected CreatePlayerData $createPlayerData
     ) {}
 
     public function execute(array $data, ?string $tempImagePath = null): Player
@@ -31,21 +34,21 @@ class RegisterPlayerUseCase
                 ]);
             }
 
-            $player = Player::create([
+            $player = $this->playerRepository->create([
                 'user_id' => $user->id,
-                'name' => $data['name'],
-                'phone' => $data['phone'],
-                'school' => $data['school'] ?? null,
-                'weight' => $data['weight'] ?? null,
-                'height' => $data['height'] ?? null,
-                'blood_type' => $data['blood_type'] ?? null,
-                'gender' => $data['gender'],
-                'age' => $data['age'],
-                'address' => $data['address'] ?? null,
-                'location' => $data['location'] ?? null,
-                'description' => $data['description'] ?? null,
+                'name' => $this->createPlayerData->name,
+                'phone' => $this->createPlayerData->phone,
+                'school' => $this->createPlayerData->school ?? null,
+                'weight' => $this->createPlayerData->weight ?? null,
+                'height' => $this->createPlayerData->height ?? null,
+                'blood_type' => $this->createPlayerData->blood_type ?? null,
+                'gender' => $this->createPlayerData->gender,
+                'age' => $this->createPlayerData->age,
+                'address' => $this->createPlayerData->address ?? null,
+                'location' => $this->createPlayerData->location ?? null,
+                'description' => $this->createPlayerData->description ?? null,
                 'image' => $tempImagePath ? $tempImagePath : null,
-                'national_id' => $data['national_id'],
+                'national_id' => $this->createPlayerData->national_id,
             ]);
 
             // DB::afterCommit(function () use ($player, $tempImagePath) {

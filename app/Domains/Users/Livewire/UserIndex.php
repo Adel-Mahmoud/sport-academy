@@ -34,15 +34,10 @@ class UserIndex extends BaseTableComponent
 
             return false;
         }
-
-        return true;
-    }
-
-    protected function handleDelete($model, $player = null): void
-    {
-        if ($player && $player->image) {
-            $this->deleteService->delete($player);
+        if ($model->player && $model->player->image) {
+            $this->deleteService->delete($model->player);
         }
+        return true;
     }
 
     public function render()

@@ -39,10 +39,6 @@ abstract class BaseTableComponent extends Component
             return;
         }
 
-        if (method_exists($this, 'handleDelete')) {
-            $this->handleDelete($model);
-        }
-
         if (method_exists($model, 'beforeDelete')) {
             $model->beforeDelete();
         }
@@ -110,13 +106,6 @@ abstract class BaseTableComponent extends Component
             if (!$this->beforeDelete($model)) {
                 continue;
             }
-
-            $player = $model->player; 
-
-            if (method_exists($this, 'handleDelete')) {
-                $this->handleDelete($model, $player);
-            }
-
             $model->delete();
 
             if (method_exists($model, 'afterDelete')) {

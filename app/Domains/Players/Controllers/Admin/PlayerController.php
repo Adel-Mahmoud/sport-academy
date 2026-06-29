@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use App\Shared\Services\ImageService;
 use App\Domains\Players\Requests\StorePlayerRequest;
 use App\Domains\Players\UseCases\RegisterPlayerUseCase;
+use App\Domains\Players\UseCases\GetPlayerUseCase;
 
 class PlayerController extends Controller
 {
@@ -44,6 +45,14 @@ class PlayerController extends Controller
                 'title' => 'تم الإضافة!',
                 'text'  => 'تمت إضافة البيانات بنجاح.',
             ]);
+    }
+
+    public function edit(int $id, GetPlayerUseCase $useCase): View
+    {
+        $player = $useCase->execute($id);
+        $titlePage = 'تعديل بيانات اللاعب';
+        $sectionPage = 'اللاعبين';
+        return view('players::admin.edit', compact('player', 'sectionPage', 'titlePage'));
     }
     /*
         \\\ on update player
