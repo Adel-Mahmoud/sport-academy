@@ -18,18 +18,6 @@ class RegisterPlayerUseCase
     public function execute(array $data, ?string $tempImagePath = null): Player
     {
         return DB::transaction(function () use ($data, $tempImagePath) {
-
-        //     $user = $this->userService->registerUser(
-        //         new CreateUserData::fromArray(
-        //             name: $data['name'],
-        //             email: $data['email'],
-        //             password: $data['password'],
-        //             roles: ['player']
-        //         )
-        //     );
-
-
-        // $dto = CreateUserData::fromArray($data);
             $data['roles'] = ['player'];
             $user = $this->userService->registerUser(CreateUserData::fromArray($data));
 
@@ -60,9 +48,9 @@ class RegisterPlayerUseCase
                 'national_id' => $data['national_id'],
             ]);
 
-            DB::afterCommit(function () use ($player, $tempImagePath) {
-                event(new PlayerCreated($player, $tempImagePath));
-            });
+            // DB::afterCommit(function () use ($player, $tempImagePath) {
+            //     event(new PlayerCreated($player, $tempImagePath));
+            // });
             return $player;
         });
     }

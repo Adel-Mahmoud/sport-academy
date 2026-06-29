@@ -26,4 +26,9 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function player()
+    {
+        return $this->hasOne(\App\Domains\Players\Models\Player::class, 'user_id');
+    }
 }

@@ -4,11 +4,13 @@ namespace App\Domains\Players\Livewire;
 
 use App\Domains\Players\Models\Player; 
 use App\Livewire\BaseTableComponent;
-use Illuminate\Support\Facades\Storage;
+use App\Domains\Players\Services\PlayerDeleteService;
 
 class PlayersIndex extends BaseTableComponent
 {
     protected string $model = Player::class;
+
+    protected PlayerDeleteService $deleteService;
 
     protected $listeners = [
         'deleteItem'       => 'deleteItem',
@@ -16,11 +18,14 @@ class PlayersIndex extends BaseTableComponent
         'refreshComponent' => '$refresh',
     ];
 
-    protected function beforeDelete($model): void
+    public function boot(PlayerDeleteService $deleteService): void
     {
-        if ($model->image && Storage::disk('public')->exists($model->image)) {
-            Storage::disk('public')->delete($model->image);
-        }
+        $this->deleteService = $deleteService;
+    }
+
+    protected function handleDelete($player): void
+    {
+        $this->deleteService->delete($player);
     }
     
     public function render()

@@ -4,10 +4,13 @@ namespace App\Domains\Users\Livewire;
 
 use App\Domains\Auth\Models\Admin;
 use App\Livewire\BaseTableComponent;
+use App\Domains\Players\Services\PlayerDeleteService;
 
 class UserIndex extends BaseTableComponent
 {
     protected string $model = Admin::class;
+
+    protected PlayerDeleteService $deleteService;
 
     protected $listeners = [
         'deleteItem' => 'deleteItem',
@@ -15,29 +18,34 @@ class UserIndex extends BaseTableComponent
         'refreshComponent' => '$refresh',
     ];
 
-    public function deleteItem($id): void
+    public function boot(PlayerDeleteService $deleteService): void
     {
-        if (auth('admin')->id() == $id) {
+        $this->deleteService = $deleteService;
+    }
+
+    protected function beforeDelete($model): bool
+    {
+        if (auth('admin')->id() == $model->id) {
 
             $this->dispatch('swal:error', [
                 'title' => 'خطأ',
                 'text' => 'لا يمكنك حذف نفسك',
             ]);
 
-            return;
+            return false;
         }
 
-        parent::deleteItem($id);
+        return true;
     }
 
-    public function deleteSelected(): void
+    protected function handleDelete($model): void
     {
-        $this->selected = collect($this->selected)
-            ->reject(fn ($id) => $id == auth('admin')->id())
-            ->values()
-            ->toArray();
+        $user = $this->model::with('player')->find($model->id);
 
-        parent::deleteSelected();
+        if ($user?->player) {
+            $this->deleteService->delete($user->player);
+        }
+        $user->delete();
     }
 
     public function render()

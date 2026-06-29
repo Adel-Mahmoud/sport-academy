@@ -4,7 +4,7 @@ namespace App\Domains\Players\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Storage;
+use App\Shared\Services\ImageService;
 use App\Domains\Players\Requests\StorePlayerRequest;
 use App\Domains\Players\UseCases\RegisterPlayerUseCase;
 
@@ -23,18 +23,20 @@ class PlayerController extends Controller
         return view('players::admin.create', compact('sectionPage', 'titlePage'));
     }
 
-    public function store(StorePlayerRequest $request, RegisterPlayerUseCase $useCase)
-    {
-        $data = $request->validated();
-
-        $tempPath = null;
+    public function store(
+        StorePlayerRequest $request,
+        RegisterPlayerUseCase $useCase,
+        ImageService $imageService
+    ) {
+        $player = $useCase->execute($request->validated());
 
         if ($request->hasFile('image')) {
-            $tempPath = $request->file('image')->store('temp', 'public');
+            $imageService->store(
+                $player,
+                $request->file('image'),
+                'players'
+            );
         }
-
-        $useCase->execute($data, $tempPath);
-        
         return redirect()
             ->route('admin.players.index')
             ->with('swal', [
@@ -43,4 +45,17 @@ class PlayerController extends Controller
                 'text'  => 'تمت إضافة البيانات بنجاح.',
             ]);
     }
+    /*
+        \\\ on update player
+        if ($request->hasFile('image')) {
+            $imageService->update(
+                $player,
+                $request->file('image'),
+                'players'
+            );
+        }
+        \\\\\ on delete player
+        $imageService->delete($player);
+        $player->delete();    
+     */
 }
