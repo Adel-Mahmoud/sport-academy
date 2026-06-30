@@ -23,9 +23,11 @@ class PlayersIndex extends BaseTableComponent
         $this->deleteService = $deleteService;
     }
 
-    protected function handleDelete($player): void
+    protected function beforeDelete($player): bool
     {
         $this->deleteService->delete($player);
+        $player->user->delete();
+        return true;
     }
     
     public function render()

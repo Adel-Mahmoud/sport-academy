@@ -23,6 +23,16 @@ return [
         ],
     ],
     [
+        'label'  => 'المدربين',
+        'type'   => 'dropdown',
+        'icon'   => '<i class="fas fa-user-tie fa-lg menu-icon"></i>',
+        'children' => [
+            ['label' => 'عرض الكل', 'url' => '/admin/coaches'],
+            ['label' => 'إضافة جديد', 'url' => '/admin/coaches/create'],
+        ],
+        // 'can'    => 'view coaches',
+    ],
+    [
         'label'  => 'اللاعبين',
         'type'   => 'dropdown',
         'icon'   => '<i class="fas fa-users fa-lg menu-icon"></i>',
@@ -33,18 +43,21 @@ return [
         // 'can'    => 'view players',
     ],
     [
+        'label'  => 'المجموعات',
+        'type'   => 'dropdown',
+        'icon'   => '<i class="fas fa-layer-group fa-lg menu-icon"></i>',
+        'children' => [
+            ['label' => 'عرض الكل', 'url' => '/admin/groups'],
+            ['label' => 'إضافة جديد', 'url' => '/admin/coaches/groups'],
+        ],
+        // 'can'    => 'view groups',
+    ],
+    [
         'label'  => 'الحضور و الغياب',
         'type'   => 'link',
         'icon'   => '<i class="fas fa-calendar-check fa-lg menu-icon"></i>',
         'url'    => '/admin/attendance',
         // 'can'    => 'view attendance',
-    ],
-    [
-        'label'  => 'المجموعات',
-        'type'   => 'link',
-        'icon'   => '<i class="fas fa-layer-group fa-lg menu-icon"></i>',
-        'url'    => '/admin/groups',
-        // 'can'    => 'view groups',
     ],
     [
         'label'  => 'التقييمات',
@@ -66,13 +79,6 @@ return [
         'icon'   => '<i class="fas fa-money-check-alt fa-lg menu-icon"></i>',
         'url'    => '/admin/subscriptions',
         // 'can'    => 'view subscriptions',
-    ],
-    [
-        'label'  => 'الموظفين و المدربين',
-        'type'   => 'link',
-        'icon'   => '<i class="fas fa-user-tie fa-lg menu-icon"></i>',
-        'url'    => '/admin/staff',
-        // 'can'    => 'view staff',
     ],
     [
         'label'  => 'الحضور و الانصراف',

@@ -39,7 +39,7 @@ class UserService
         $user->update([
             'name'     => $data->name,
             'email'    => $data->email,
-            'password' => Hash::make($data->password),
+            'password' => !is_null($data->password) ? Hash::make($data->password) : $user->password,
         ]);
 
         if (!empty($data->roles)) {

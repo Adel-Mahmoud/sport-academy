@@ -22,6 +22,7 @@ class UpdatePlayerRequest extends FormRequest
             'email'       => 'required|email|unique:admins,email,' . $player->user_id,
             'password'    => 'nullable|string|min:8',
             'phone'       => 'required|string',
+            'national_id' => 'required|string|unique:players,national_id,' . $player->id,
             'school'      => 'nullable|string',
             'weight'      => 'nullable|numeric',
             'height'      => 'nullable|numeric',

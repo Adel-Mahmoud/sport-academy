@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\DB;
 use App\Domains\Players\Models\Player;
 use App\Domains\Users\Services\UserService;
 use App\Domains\Players\DTOs\UpdatePlayerData;
-use App\Domains\Players\Repositories\PlayerRepository;
 use App\Domains\Users\DTOs\UpdateUserData;
+use App\Domains\Players\Repositories\PlayerRepository;
 
 class UpdatePlayerUseCase
 {
@@ -17,29 +17,17 @@ class UpdatePlayerUseCase
     ) {}
 
     public function execute(
-        UpdatePlayerData $data,
-        ?string $imagePath = null
+        int $playerId,
+        array $data,
     ): Player {
 
-        return DB::transaction(function () use ($data, $imagePath) {
-            $this->userService->updateUser($data->toUserData());
+        return DB::transaction(function () use ($playerId, $data) {
+            $player = $this->playerRepository->find($playerId);
+            $data['id'] = $player->user_id;
+            $this->userService->updateUser(UpdateUserData::fromArray($data));
             return $this->playerRepository->update(
-                $data->id,
-                [
-                    'name' => $data->name,
-                    'phone' => $data->phone,
-                    'school' => $data->school,
-                    'weight' => $data->weight,
-                    'height' => $data->height,
-                    'blood_type' => $data->blood_type,
-                    'gender' => $data->gender,
-                    'age' => $data->age,
-                    'address' => $data->address,
-                    'location' => $data->location,
-                    'description' => $data->description,
-                    'image' => $imagePath,
-                    'national_id' => $data->national_id,
-                ]
+                $playerId,
+                UpdatePlayerData::fromArray($data)
             );
         });
     }

@@ -63,7 +63,7 @@ class PlayerController extends Controller
         UpdatePlayerUseCase $useCase,
         ImageService $imageService
     ) {
-        $player = $useCase->execute($request->validated(), $id);
+        $player = $useCase->execute( $id,$request->validated());
 
         if ($request->hasFile('image')) {
             $imageService->update(

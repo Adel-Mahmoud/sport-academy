@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Domains\Players\DTOs;
-use App\Domains\Users\DTOs\UpdateUserData;
-use Illuminate\Support\Facades\Hash;
 
 class UpdatePlayerData
 {
@@ -25,7 +23,7 @@ class UpdatePlayerData
     {
         return new self(
             name: $data['name'],
-            phone: $data['phone'],
+            phone: $data['phone'],  
             national_id: $data['national_id'],
             age: $data['age'],
             school: $data['school'] ?? null,
@@ -39,14 +37,21 @@ class UpdatePlayerData
         );
     }
 
-    public function toUserData(): UpdateUserData
+    public function toArray(): array
     {
-        return new UpdateUserData(
-            id: $this->user_id,
-            name: $this->name,
-            email: $this->email,
-            password: Hash::make($this->password) ?? null,
-            roles: ['player'],
-        );
+        return [
+            'name' => $this->name,
+            'phone' => $this->phone,
+            'national_id' => $this->national_id,
+            'age' => $this->age,
+            'school' => $this->school,
+            'weight' => $this->weight,
+            'height' => $this->height,
+            'blood_type' => $this->blood_type,
+            'gender' => $this->gender,
+            'address' => $this->address,
+            'description' => $this->description,
+            'location' => $this->location,
+        ];
     }
 }

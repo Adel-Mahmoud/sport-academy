@@ -17,43 +17,43 @@
 
         <div class="col-md-6 mb-3">
             <label class="form-label">الاسم</label>
-            <input value="Ahmed" type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">البريد الإلكتروني</label>
-            <input value="ahmed@example.com" type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
             @error('email') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">كلمة المرور</label>
-            <input value="password123" type="password" name="password" class="form-control" required>
+            <input type="password" name="password" class="form-control" required>
             @error('password') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">رقم الهاتف</label>
-            <input value="123456789" type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
+            <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
             @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">المدرسة</label>
-            <input value="المدرسة العامة" type="text" name="school" class="form-control" value="{{ old('school') }}">
+            <input type="text" name="school" class="form-control" value="{{ old('school') }}">
             @error('school') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">الهوية الوطنية</label>
-            <input value="123456789" type="text" name="national_id" class="form-control" value="{{ old('national_id') }}" required>
+            <input type="text" name="national_id" class="form-control" value="{{ old('national_id') }}" required>
             @error('national_id') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
         <div class="col-md-4 mb-3">
             <label class="form-label">العمر</label>
-            <input value="25" type="number" name="age" class="form-control" value="{{ old('age') }}" required>
+            <input type="number" name="age" class="form-control" value="{{ old('age') }}" required>
             @error('age') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
@@ -65,7 +65,7 @@
 
         <div class="col-md-4 mb-3">
             <label class="form-label">الطول</label>
-            <input value="170" type="number" step="0.1" name="height" class="form-control" value="{{ old('height') }}">
+            <input type="number" step="0.1" name="height" class="form-control" value="{{ old('height') }}">
             @error('height') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
@@ -73,7 +73,7 @@
             <label class="form-label">فصيلة الدم</label>
             <select name="blood_type" class="form-control">
                 <option value="">اختر فصيلة الدم</option>
-                <option value="A+" {{ old('blood_type') == 'A+' ? 'selected' : '' }} selected>A+</option>
+                <option value="A+" {{ old('blood_type') == 'A+' ? 'selected' : '' }}>A+</option>
                 <option value="A-" {{ old('blood_type') == 'A-' ? 'selected' : '' }}>A-</option>
                 <option value="B+" {{ old('blood_type') == 'B+' ? 'selected' : '' }}>B+</option>
                 <option value="B-" {{ old('blood_type') == 'B-' ? 'selected' : '' }}>B-</option>
@@ -89,7 +89,7 @@
             <label class="form-label">الجنس</label>
             <select name="gender" class="form-control" required>
                 <option value="">اختر الجنس</option>
-                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }} selected>ذكر</option>
+                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>ذكر</option>
                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>أنثى</option>
             </select>
             @error('gender') <span class="text-danger">{{ $message }}</span> @enderror
