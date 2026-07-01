@@ -11,11 +11,12 @@ return new class extends Migration
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('user_id')->constrained('admins')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->date('hire_date');
             $table->decimal('salary', 10, 2);
+            $table->string('status')->nullable('active');
             $table->timestamps();
         });
     }

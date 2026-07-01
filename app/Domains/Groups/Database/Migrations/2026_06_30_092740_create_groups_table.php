@@ -8,12 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('academy_groups', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('level');
             $table->foreignId('sport_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('branch_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('branch_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('description')->nullable();
+            $table->string('status')->nullable('active');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();   
             $table->timestamps();
         });
     }

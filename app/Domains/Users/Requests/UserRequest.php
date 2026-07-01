@@ -20,7 +20,7 @@ class UserRequest extends FormRequest
             'email'    => [
                 'required',
                 'email',
-                Rule::unique('admins', 'email')->ignore($this->route('user')),
+                Rule::unique('users', 'email')->ignore($this->route('user')),
             ],
             'password' => $this->isMethod('post') ? 'required|string|min:6' : 'nullable|string|min:6',
             'roles'    => 'required|array',

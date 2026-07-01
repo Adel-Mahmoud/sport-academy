@@ -20,7 +20,7 @@ class UpdateCoachRequest extends FormRequest
         return [
             'name'      => 'required|string|max:255',
             'phone'     => 'nullable|string|max:20',
-            'email'     => 'required|email|unique:coaches,email,' . $coach->user_id,
+            'email'     => 'required|email|unique:users,email,' . $coach->user_id,
             'password'    => 'nullable|string|min:8',
             'hire_date' => 'required|date',
             'salary'    => 'required|numeric|min:0',

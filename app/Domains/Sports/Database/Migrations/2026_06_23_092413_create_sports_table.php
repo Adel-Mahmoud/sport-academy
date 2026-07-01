@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('branch_id')->nullable();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('status')->nullable('active');
             $table->timestamps();
         });
     }

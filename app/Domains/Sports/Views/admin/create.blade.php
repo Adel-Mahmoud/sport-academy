@@ -16,7 +16,14 @@
 
         <div class="col-md-6 mb-3">
             <label class="form-label">رقم الفرع (Branch ID)</label>
-            <input type="number" name="branch_id" class="form-control" value="{{ old('branch_id') }}" disabled>
+            <select name="branch_id" class="form-control" required>
+                <option value="">اختر الفرع</option>
+                @foreach($branches as $branch)
+                    <option value="{{ $branch->id }}" {{ old('branch_id') == $branch->id ? 'selected' : '' }}>
+                        {{ $branch->name }}
+                    </option>
+                @endforeach
+            </select>
             @error('branch_id') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 

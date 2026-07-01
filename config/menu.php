@@ -10,6 +10,19 @@ return [
         // 'badge-color'  => 'success',
     ],
     [
+        'label'  => 'الفروع',
+        'type'   => 'dropdown',
+        'icon'   => '<i class="fas fa-code-branch fa-lg menu-icon"></i>',
+        'children' => [
+            ['label' => 'عرض الكل', 'url' => '/admin/branches', 
+            // 'can' => 'view branches'
+            ],
+            ['label' => 'إضافة جديد', 'url' => '/admin/branches/create', // 'can' => 'create branch'
+            ],
+        ],
+        // 'can'    => 'view branches',
+    ],
+    [
         'label'  => 'الرياضات',
         'type'   => 'dropdown',
         'icon'   => '<i class="fas fa-futbol fa-lg menu-icon"></i>',
@@ -48,7 +61,7 @@ return [
         'icon'   => '<i class="fas fa-layer-group fa-lg menu-icon"></i>',
         'children' => [
             ['label' => 'عرض الكل', 'url' => '/admin/groups'],
-            ['label' => 'إضافة جديد', 'url' => '/admin/coaches/groups'],
+            ['label' => 'إضافة جديد', 'url' => '/admin/groups/create'],
         ],
         // 'can'    => 'view groups',
     ],
@@ -114,13 +127,6 @@ return [
         'icon'   => '<i class="fas fa-shopping-cart fa-lg menu-icon"></i>',
         'url'    => '/admin/purchases',
         // 'can'    => 'view purchases',
-    ],
-    [
-        'label'  => 'الفروع',
-        'type'   => 'link',
-        'icon'   => '<i class="fas fa-code-branch fa-lg menu-icon"></i>',
-        'url'    => '/admin/branches',
-        // 'can'    => 'view branches',
     ],
     [
         'label'  => 'المستخدمين',

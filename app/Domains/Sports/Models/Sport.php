@@ -11,4 +11,13 @@ class Sport extends Model
         'branch_id',
         'status'
     ];
+
+    public function branch()
+    {
+        return $this->belongsTo(\App\Domains\Branches\Models\Branch::class);
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

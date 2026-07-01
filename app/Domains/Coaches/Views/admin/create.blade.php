@@ -9,23 +9,19 @@
 >
 
     <div class="row">
+        <x-auth.login-fields />
+
+        <!--  Basic Data Header -->
+        <div class="col-12 mb-3 mt-4">
+            <div class="bg-primary text-white p-2 rounded">
+                <strong>البيانات الأساسية</strong>
+            </div>
+        </div>
 
         <div class="col-md-6 mb-3">
             <label class="form-label">الاسم</label>
             <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label class="form-label">البريد الإلكتروني</label>
-            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
-            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-        </div>
-
-        <div class="col-md-6 mb-3">
-            <label class="form-label">كلمة المرور</label>
-            <input type="password" name="password" class="form-control" required>
-            @error('password') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         
         <div class="col-md-6 mb-3">

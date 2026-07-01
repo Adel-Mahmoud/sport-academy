@@ -25,16 +25,6 @@ class RegisterPlayerUseCase
             $data['roles'] = ['player'];
             $user = $this->userService->registerUser(CreateUserData::fromArray($data));
 
-
-            if (! $user->exists) {
-                throw new \Exception('Player creation failed');
-            } else {
-                Role::firstOrCreate([
-                    'name' => 'player',
-                    'guard_name' => 'admin',
-                ]);
-            }
-
             $player = $this->playerRepository->create([
                 'user_id' => $user->id,
                 'name' => $playerData->name,

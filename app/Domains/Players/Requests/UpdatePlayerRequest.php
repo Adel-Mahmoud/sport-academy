@@ -19,7 +19,7 @@ class UpdatePlayerRequest extends FormRequest
             ->findOrFail($this->route('player'));
         return [
             'name'        => 'required|string|max:255',
-            'email'       => 'required|email|unique:admins,email,' . $player->user_id,
+            'email'       => 'required|email|unique:users,email,' . $player->user_id,
             'password'    => 'nullable|string|min:8',
             'phone'       => 'required|string',
             'national_id' => 'required|string|unique:players,national_id,' . $player->id,

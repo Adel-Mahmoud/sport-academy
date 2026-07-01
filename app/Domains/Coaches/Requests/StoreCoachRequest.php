@@ -16,7 +16,7 @@ class StoreCoachRequest extends FormRequest
         return [
             'name'      => 'required|string|max:255',
             'phone'     => 'nullable|string|max:20',
-            'email'       => 'required|email|unique:admins,email',
+            'email'       => 'required|email|unique:users,email',
             'password'    => 'required|string|min:8',
             'hire_date' => 'required|date',
             'salary'    => 'required|numeric|min:0',

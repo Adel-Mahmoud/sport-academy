@@ -99,7 +99,7 @@ abstract class BaseTableComponent extends Component
             return;
         }
 
-        $models = $this->model::whereIn('id', $this->selected)->with('player')->get();
+        $models = $this->model::whereIn('id', $this->selected)->get();
 
         foreach ($models as $model) {
 

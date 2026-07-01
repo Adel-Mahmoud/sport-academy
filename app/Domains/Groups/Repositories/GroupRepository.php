@@ -11,7 +11,7 @@ class GroupRepository
         return Group::all();
     }
 
-    public function find($id)
+    public function find(int $id)
     {
         return Group::find($id);
     }
@@ -21,14 +21,14 @@ class GroupRepository
         return Group::create($data);
     }
 
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         $model = Group::findOrFail($id);
         $model->update($data);
         return $model;
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         return Group::destroy($id);
     }

@@ -25,16 +25,6 @@ class RegisterCoachUseCase
             $data['roles'] = ['coach'];
             $user = $this->userService->registerUser(CreateUserData::fromArray($data));
 
-
-            if (! $user->exists) {
-                throw new \Exception('Coach creation failed');
-            } else {
-                Role::firstOrCreate([
-                    'name' => 'coach',
-                    'guard_name' => 'admin',
-                ]);
-            }
-
             $coach = $this->coachRepository->create([
                 'user_id' => $user->id,
                 'name' => $coachData->name,

@@ -17,14 +17,14 @@
                 @else
                     <a href="{{ route('admin.branches.create') }}" class="btn btn-primary mb-2 mb-md-0">
                         <i class="fas fa-plus"></i>
-                        إضافة Branch جديد
+                        إضافة فرع جديد
                     </a>
                 @endif
             </div>
         </div>
 
         <div class="card-header pb-0">
-            <h4 class="card-title">قائمة Branches</h4>
+            <h4 class="card-title">قائمة الفروع</h4>
 
             @if(count($selected) > 0)
                 <div class="text-muted mt-1">
@@ -43,6 +43,8 @@
                             </th>
                             <th>#</th>
                             <th>الاسم</th>
+                            <th>الموقع</th>
+                            <th>الحالة</th>
                             <th width="150">الإجراءات</th>
                         </tr>
                     </thead>
@@ -62,6 +64,16 @@
                                 </td>
 
                                 <td>{{ $branch->name }}</td>
+
+                                <td>{{ $branch->location }}</td>
+
+                                <td>
+                                    @if($branch->status)
+                                        <span class="badge badge-success">نشط</span>
+                                    @else
+                                        <span class="badge badge-danger">غير نشط</span>
+                                    @endif
+                                </td>
 
                                 <td>
                                     <a href="{{ route('admin.branches.edit', $branch->id) }}"

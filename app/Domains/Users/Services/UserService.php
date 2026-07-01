@@ -3,16 +3,16 @@
 namespace App\Domains\Users\Services;
 
 use Illuminate\Support\Facades\Hash;
-use App\Domains\Auth\Models\Admin;
+use App\Domains\Users\Models\User;
 use App\Domains\Users\DTOs\CreateUserData;
 use App\Domains\Users\DTOs\UpdateUserData;
 use Spatie\Permission\Models\Role;
 
 class UserService
 {
-    public function registerUser(CreateUserData $data): Admin
+    public function registerUser(CreateUserData $data): User
     {
-        $user = Admin::create([
+        $user = User::create([
             'name'     => $data->name,
             'email'    => $data->email,
             'password' => Hash::make($data->password),
@@ -22,7 +22,7 @@ class UserService
             foreach ($data->roles as $roleName) {
                 Role::firstOrCreate([
                     'name'       => $roleName,
-                    'guard_name' => 'admin',
+                    'guard_name' => 'web',
                 ]);
 
                 $user->assignRole($roleName);
@@ -32,9 +32,9 @@ class UserService
         return $user;
     }
 
-    public function updateUser(UpdateUserData $data): Admin
+    public function updateUser(UpdateUserData $data): User
     {
-        $user = Admin::findOrFail($data->id);
+        $user = User::findOrFail($data->id);
 
         $user->update([
             'name'     => $data->name,
@@ -46,7 +46,7 @@ class UserService
             foreach ($data->roles as $roleName) {
                 Role::firstOrCreate([
                     'name'       => $roleName,
-                    'guard_name' => 'admin',
+                    'guard_name' => 'web',
                 ]);
 
                 $user->assignRole($roleName);

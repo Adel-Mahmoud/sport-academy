@@ -14,12 +14,13 @@ return new class extends Migration
             $table->foreignId('coach_id')->constrained()->onDelete('cascade');
             $table->string('role')->default('head');
             $table->boolean('is_primary')->default(true);
+            $table->string('status')->nullable('active');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('group_coach');
     }
 };

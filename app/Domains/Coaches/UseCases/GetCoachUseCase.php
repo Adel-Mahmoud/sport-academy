@@ -10,6 +10,6 @@ class GetCoachUseCase
     ) {}
     public function execute(int $id): Coach
     {
-        return $this->coachRepository->find($id)->whileLoading('user');
+        return $this->coachRepository->find($id);
     }
 }

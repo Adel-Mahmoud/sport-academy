@@ -10,6 +10,6 @@ class GetPlayerUseCase
     }
     public function execute(int $id): Player
     {
-        return $this->playerRepository->find($id)->whileLoading('user');
+        return $this->playerRepository->find($id);
     }
 }

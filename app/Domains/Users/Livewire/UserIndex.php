@@ -2,13 +2,13 @@
 
 namespace App\Domains\Users\Livewire;
 
-use App\Domains\Auth\Models\Admin;
+use App\Domains\Users\Models\User;
 use App\Livewire\BaseTableComponent;
 use App\Domains\Players\Services\PlayerDeleteService;
 
 class UserIndex extends BaseTableComponent
 {
-    protected string $model = Admin::class;
+    protected string $model = User::class;
 
     protected PlayerDeleteService $deleteService;
 
@@ -25,7 +25,7 @@ class UserIndex extends BaseTableComponent
 
     protected function beforeDelete($model): bool
     {
-        if (auth('admin')->id() == $model->id) {
+        if (auth()->id() == $model->id) {
 
             $this->dispatch('swal:error', [
                 'title' => 'خطأ',

@@ -18,7 +18,7 @@ class UpdateUserData
             id: $data['id'],
             name: $data['name'],
             email: $data['email'],
-            password: $data['password'],
+            password: $data['password'] ?? null,
             roles: $data['roles'] ?? [],
         );
     }

@@ -13,7 +13,7 @@ class CoachRepository
 
     public function find(int $id)
     {
-        return Coach::find($id);
+        return Coach::with('user')->find($id);
     }
 
     public function create(array $data)
@@ -23,7 +23,7 @@ class CoachRepository
 
     public function update(int $id, array $data)
     {
-        $model = Coach::findOrFail($id);
+        $model = Coach::with('user')->findOrFail($id);
         $model->update($data);
         return $model;
     }

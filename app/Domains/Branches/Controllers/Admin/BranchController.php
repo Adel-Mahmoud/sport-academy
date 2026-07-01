@@ -12,16 +12,19 @@ use App\Domains\Branches\UseCases\UpdateBranchUseCase;
 
 class BranchController extends Controller
 {
+    public $titlePage = 'الفروع';
+    public $sectionPage = 'فرع';
+
     public function index(): View
     {
-        $titlePage = 'Branches';
+        $titlePage = $this->titlePage;
         return view('branches::admin.index', compact('titlePage'));
     }
 
     public function create(): View
     {
-        $titlePage = 'إضافة Branch جديد';
-        $sectionPage = 'Branches';
+        $titlePage = 'إضافة فرع جديد';
+        $sectionPage = $this->sectionPage;
         return view('branches::admin.create', compact('sectionPage', 'titlePage'));
     }
 
@@ -45,8 +48,8 @@ class BranchController extends Controller
         GetBranchUseCase $useCase
     ): View {
         $branch = $useCase->execute($id);
-        $titlePage = 'تعديل Branch';
-        $sectionPage = 'Branches';
+        $titlePage = 'تعديل ' . $this->titlePage;
+        $sectionPage = $this->sectionPage;
         return view('branches::admin.edit', compact('branch', 'sectionPage', 'titlePage'));
     }
 

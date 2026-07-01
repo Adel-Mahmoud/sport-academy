@@ -333,16 +333,19 @@ use App\Domains\\{$this->name}\UseCases\Update{$this->className}UseCase;
 
 class {$this->className}Controller extends Controller
 {
+    public \$titlePage = '{$this->name}';
+    public \$sectionPage = '{$this->name}';
+
     public function index(): View
     {
-        \$titlePage = '{$this->name}';
+        \$titlePage = \$this->titlePage;
         return view('{$this->viewNamespace}::admin.index', compact('titlePage'));
     }
 
     public function create(): View
     {
-        \$titlePage = 'إضافة {$this->className} جديد';
-        \$sectionPage = '{$this->name}';
+        \$titlePage = 'إضافة ' . \$this->titlePage . ' جديد';
+        \$sectionPage = \$this->sectionPage;
         return view('{$this->viewNamespace}::admin.create', compact('sectionPage', 'titlePage'));
     }
 
@@ -366,8 +369,8 @@ class {$this->className}Controller extends Controller
         Get{$this->className}UseCase \$useCase
     ): View {
         \${$this->variable} = \$useCase->execute(\$id);
-        \$titlePage = 'تعديل {$this->className}';
-        \$sectionPage = '{$this->name}';
+        \$titlePage = 'تعديل ' . \$this->titlePage;
+        \$sectionPage = \$this->sectionPage;
         return view('{$this->viewNamespace}::admin.edit', compact('{$this->variable}', 'sectionPage', 'titlePage'));
     }
 

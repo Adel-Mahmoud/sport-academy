@@ -7,10 +7,10 @@
             <div class="col-12 col-md-8 text-md-end text-left">
                 @if(count($selected) > 0)
                 @can('delete sport')
+                @endcan
                 <button wire:click="confirmDeleteSelected" class="btn btn-danger">
                     <i class="fas fa-trash"></i> حذف العناصر المحددة ({{ count($selected) }})
                 </button>
-                @endcan
                 @else
                 <a href="{{ route('admin.sports.create') }}" class="btn btn-primary mb-2 mb-md-0">
                     <i class="fas fa-plus"></i> إضافة رياضة جديدة
@@ -38,6 +38,7 @@
                             </th>
                             <th>#</th>
                             <th>اسم الرياضة</th>
+                            <th>الفرع</th>
                             <th>الحالة</th>
                             <th>تاريخ الإنشاء</th>
                             <th width="150">الإجراءات</th>
@@ -54,6 +55,7 @@
                             </td>
                             <td>{{ $loop->iteration + ($sports->currentPage() - 1) * $sports->perPage() }}</td>
                             <td>{{ $sport->name }}</td>
+                            <td>{{ $sport->branch->name ?? 'غير محدد' }}</td>
                             <td>
                                 @if($sport->status == 'active')
                                 <span class="badge bg-success">نشط</span>

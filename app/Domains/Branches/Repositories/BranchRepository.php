@@ -11,6 +11,11 @@ class BranchRepository
         return Branch::all();
     }
 
+    public function allActive()
+    {
+        return Branch::active()->get();
+    }
+
     public function find(int $id)
     {
         return Branch::find($id);

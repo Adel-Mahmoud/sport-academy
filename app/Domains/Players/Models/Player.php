@@ -20,11 +20,26 @@ class Player extends Model
         'location',
         'description',
         'image',
-        'national_id'
+        'national_id',
+        'status',
     ];
 
     public function user()
     {
-        return $this->belongsTo(\App\Domains\Auth\Models\Admin::class, 'user_id');
+        return $this->belongsTo(\App\Domains\Users\Models\User::class, 'user_id');
+    }
+
+    public function coaches()
+    {
+        return $this->belongsToMany(\App\Domains\Coaches\Models\Coach::class, 'coach_player', 'player_id', 'coach_id')
+            ->withPivot('status')
+            ->withTimestamps();
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(\App\Domains\Groups\Models\Group::class, 'group_player', 'player_id', 'group_id')
+            ->withPivot('joined_at', 'status')
+            ->withTimestamps();
     }
 }

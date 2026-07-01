@@ -14,7 +14,7 @@ class PlayerRepository
 
     public function find($id)
     {
-        return Player::findOrFail($id);
+        return Player::with('user')->find($id);
     }
 
     public function create(array $data)

@@ -22,6 +22,7 @@ class SportsIndex extends BaseTableComponent
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', "%{$this->search}%"); 
             })
+            ->with('branch')
             ->paginate(10);
 
         return view('sports::livewire.sports-index', compact('sports'));
