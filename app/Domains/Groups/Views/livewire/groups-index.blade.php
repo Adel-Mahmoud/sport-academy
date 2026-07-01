@@ -43,6 +43,13 @@
                             </th>
                             <th>#</th>
                             <th>الاسم</th>
+                            <th>الرياضة</th>
+                            <th>الفرع</th>
+                            <th>المستوى</th>
+                            <th>الوصف</th>
+                            <th>الحالة</th>
+                            <th>تاريخ البداية</th>
+                            <th>تاريخ النهاية</th>
                             <th width="150">الإجراءات</th>
                         </tr>
                     </thead>
@@ -62,6 +69,13 @@
                                 </td>
 
                                 <td>{{ $group->name }}</td>
+                                <td>{{ $group->sport?->name }}</td>
+                                <td>{{ $group->branch?->name }}</td>
+                                <td>{{ $group->level }}</td>
+                                <td>{{ $group->description }}</td>
+                                <td>{{ $group->status }}</td>
+                                <td>{{ $group->start_date }}</td>
+                                <td>{{ $group->end_date }}</td>
 
                                 <td>
                                     <a href="{{ route('admin.groups.edit', $group->id) }}"
@@ -76,8 +90,8 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
-                                <td colspan="4" class="text-center py-4">
+                            <tr> 
+                                <td colspan="11" class="text-center py-4">
                                     <i class="fas fa-inbox fa-2x text-muted mb-2"></i>
                                     <br>
                                     لا توجد بيانات حالياً

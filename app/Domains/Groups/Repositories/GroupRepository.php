@@ -8,28 +8,38 @@ class GroupRepository
 {
     public function all()
     {
-        return Group::all();
+        return Group::latest()->paginate(20);
     }
 
-    public function find(int $id)
+    public function getSports()
     {
-        return Group::find($id);
+        return Group::select('sport_id')->distinct()->get();
     }
 
-    public function create(array $data)
+    public function getBranches()
+    {
+        return Group::select('branch_id')->distinct()->get();
+    }
+
+    public function find(int $id): ?Group
+    {
+        return Group::with(['coaches.user', 'players'])->find($id);
+    }
+
+    public function create(array $data): Group
     {
         return Group::create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): Group
     {
-        $model = Group::findOrFail($id);
-        $model->update($data);
-        return $model;
+        $group = Group::findOrFail($id);
+        $group->update($data);
+        return $group;
     }
 
-    public function delete(int $id)
+    public function delete(int $id): void
     {
-        return Group::destroy($id);
+        Group::destroy($id);
     }
 }

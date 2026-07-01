@@ -6,15 +6,21 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Domains\Groups\Requests\StoreGroupRequest;
 use App\Domains\Groups\Requests\UpdateGroupRequest;
-use App\Domains\Groups\UseCases\GetGroupUseCase;
 use App\Domains\Groups\UseCases\RegisterGroupUseCase;
 use App\Domains\Groups\UseCases\UpdateGroupUseCase;
+use App\Domains\Groups\Repositories\GroupRepository;
 
 class GroupController extends Controller
 {
+    public $groupRepository;
     public $titlePage = 'المجموعات';
     public $sectionPage = 'مجموعة';
 
+    public function __construct(GroupRepository $groupRepository)
+    {
+        $this->groupRepository = $groupRepository;
+    }
+    
     public function index(): View
     {
         $titlePage = $this->titlePage;
@@ -25,7 +31,9 @@ class GroupController extends Controller
     {
         $titlePage = 'إضافة '.$this->titlePage.' جديد';
         $sectionPage = $this->sectionPage;
-        return view('groups::admin.create', compact('sectionPage', 'titlePage'));
+        $sports = $this->groupRepository->getSports();
+        $branches = $this->groupRepository->getBranches();
+        return view('groups::admin.create', compact('sectionPage', 'titlePage', 'sports', 'branches'));
     }
 
     public function store(
@@ -45,12 +53,13 @@ class GroupController extends Controller
 
     public function edit(
         int $id,
-        GetGroupUseCase $useCase
     ): View {
-        $group = $useCase->execute($id);
+        $group = $this->groupRepository->find($id);
         $titlePage = 'تعديل '.$this->titlePage;
         $sectionPage = $this->sectionPage;
-        return view('groups::admin.edit', compact('group', 'sectionPage', 'titlePage'));
+        $sports = $this->groupRepository->getSports();
+        $branches = $this->groupRepository->getBranches();
+        return view('groups::admin.edit', compact('group', 'sectionPage', 'titlePage', 'sports', 'branches'));
     }
 
     public function update(
