@@ -44,7 +44,6 @@
                             <th>#</th>
                             <th>الاسم</th>
                             <th>الرياضة</th>
-                            <th>الفرع</th>
                             <th>المستوى</th>
                             <th>الوصف</th>
                             <th>الحالة</th>
@@ -70,10 +69,13 @@
 
                                 <td>{{ $group->name }}</td>
                                 <td>{{ $group->sport?->name }}</td>
-                                <td>{{ $group->branch?->name }}</td>
                                 <td>{{ $group->level }}</td>
                                 <td>{{ $group->description }}</td>
-                                <td>{{ $group->status }}</td>
+                                @if($group->status === 'active')
+                                    <td><span class="badge bg-success">نشط</span></td>
+                                @elseif($group->status === 'inactive')
+                                    <td><span class="badge bg-danger">غير نشط</span></td>
+                                @endif
                                 <td>{{ $group->start_date }}</td>
                                 <td>{{ $group->end_date }}</td>
 

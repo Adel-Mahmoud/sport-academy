@@ -4,18 +4,8 @@ namespace App\Domains\Groups\DTOs;
 
 class CreateGroupData
 {
-    // 'sport_id',
-    // 'branch_id',
-    // 'name',
-    // 'level',
-    // 'description',
-    // 'status',
-    // 'start_date',
-    // 'end_date'
-    // create all the properties that are needed to create a group
     private string $name;
     private ?int $sport_id = null;
-    private ?int $branch_id = null;
     private ?string $level = null;
     private ?string $description = null;
     private ?string $status = null;
@@ -25,7 +15,6 @@ class CreateGroupData
     public function __construct(
         string $name,
         ?int $sport_id = null,
-        ?int $branch_id = null,
         ?string $level = null,
         ?string $description = null,
         ?string $status = null,
@@ -34,7 +23,6 @@ class CreateGroupData
     ) {
         $this->name = $name;
         $this->sport_id = $sport_id;
-        $this->branch_id = $branch_id;
         $this->level = $level;
         $this->description = $description;
         $this->status = $status;
@@ -47,7 +35,6 @@ class CreateGroupData
         return new self(
             name: $data['name'],
             sport_id: $data['sport_id'] ?? null,
-            branch_id: $data['branch_id'] ?? null,
             level: $data['level'] ?? null,
             description: $data['description'] ?? null,
             status: $data['status'] ?? null,
@@ -61,7 +48,6 @@ class CreateGroupData
         return [
             'name' => $this->name,
             'sport_id' => $this->sport_id,
-            'branch_id' => $this->branch_id,
             'level' => $this->level,
             'description' => $this->description,
             'status' => $this->status,

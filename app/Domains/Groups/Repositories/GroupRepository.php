@@ -16,14 +16,24 @@ class GroupRepository
         return Group::select('sport_id')->distinct()->get();
     }
 
-    public function getBranches()
+    public function getPlayers(int $groupId)
     {
-        return Group::select('branch_id')->distinct()->get();
+        return Group::findOrFail($groupId)->players()->paginate(20);
     }
+
+    public function getCoaches(int $groupId)
+    {
+        return Group::findOrFail($groupId)->coaches()->paginate(20);
+    }
+    
+    // public function getBranches()
+    // {
+    //     return Group::select('branch_id')->distinct()->get();
+    // }
 
     public function find(int $id): ?Group
     {
-        return Group::with(['coaches.user', 'players'])->find($id);
+        return Group::with(['sport'])->find($id);
     }
 
     public function create(array $data): Group
@@ -42,4 +52,5 @@ class GroupRepository
     {
         Group::destroy($id);
     }
+
 }

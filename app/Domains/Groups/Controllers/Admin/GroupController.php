@@ -9,17 +9,19 @@ use App\Domains\Groups\Requests\UpdateGroupRequest;
 use App\Domains\Groups\UseCases\RegisterGroupUseCase;
 use App\Domains\Groups\UseCases\UpdateGroupUseCase;
 use App\Domains\Groups\Repositories\GroupRepository;
+use App\Domains\Sports\Repositories\SportRepository;
 
 class GroupController extends Controller
 {
     public $groupRepository;
+    public $sportRepository;
     public $titlePage = 'المجموعات';
     public $sectionPage = 'مجموعة';
 
-    public function __construct(GroupRepository $groupRepository)
+    public function __construct(GroupRepository $groupRepository, SportRepository $sportRepository)
     {
         $this->groupRepository = $groupRepository;
-    }
+        $this->sportRepository = $sportRepository;}
     
     public function index(): View
     {
@@ -31,9 +33,8 @@ class GroupController extends Controller
     {
         $titlePage = 'إضافة '.$this->titlePage.' جديد';
         $sectionPage = $this->sectionPage;
-        $sports = $this->groupRepository->getSports();
-        $branches = $this->groupRepository->getBranches();
-        return view('groups::admin.create', compact('sectionPage', 'titlePage', 'sports', 'branches'));
+        $sports = $this->sportRepository->all();
+        return view('groups::admin.create', compact('sectionPage', 'titlePage', 'sports'));
     }
 
     public function store(
@@ -57,9 +58,8 @@ class GroupController extends Controller
         $group = $this->groupRepository->find($id);
         $titlePage = 'تعديل '.$this->titlePage;
         $sectionPage = $this->sectionPage;
-        $sports = $this->groupRepository->getSports();
-        $branches = $this->groupRepository->getBranches();
-        return view('groups::admin.edit', compact('group', 'sectionPage', 'titlePage', 'sports', 'branches'));
+        $sports = $this->sportRepository->all();
+        return view('groups::admin.edit', compact('group', 'sectionPage', 'titlePage', 'sports'));
     }
 
     public function update(
@@ -76,5 +76,19 @@ class GroupController extends Controller
                 'title' => 'تم التعديل!',
                 'text' => 'تم تعديل البيانات بنجاح.',
             ]);
+    }
+
+    public function players(int $id): View
+    {
+        $group = $this->groupRepository->getPlayers($id);
+        $titlePage = 'لاعبين '.$this->sectionPage;
+        return view('groups::admin.players', compact('group', 'titlePage'));
+    }
+
+    public function coaches(int $id): View
+    {
+        $group = $this->groupRepository->getCoaches($id);
+        $titlePage = 'مدربين '.$this->sectionPage;
+        return view('groups::admin.coaches', compact('group', 'titlePage'));
     }
 }

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('group_player', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained()->onDelete('cascade');
+            $table->foreignId('group_coach_id')->constrained('group_coach')->onDelete('cascade');
             $table->foreignId('player_id')->constrained()->onDelete('cascade');
             $table->date('joined_at')->nullable();
             $table->string('status')->default('active');

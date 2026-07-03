@@ -73,6 +73,15 @@ body {
 .rounded-3 {
     border-radius: 1rem;
 }
+/* .app-sidebar {
+    background-color: #1a2239 !important;
+}
+.side-menu__item i {
+    color: #dfe7ee !important;
+}
+.side-menu__item .side-menu__label {
+    color: #dfe7ee !important;
+} */
 /* .main-logo{
     height: 4rem !important;
 }

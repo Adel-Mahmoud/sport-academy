@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('level');
             $table->foreignId('sport_id')->constrained()->onDelete('cascade');
-            $table->foreignId('branch_id')->nullable()->constrained()->onDelete('set null');
             $table->string('description')->nullable();
             $table->string('status')->nullable('active');
             $table->date('start_date')->nullable();
