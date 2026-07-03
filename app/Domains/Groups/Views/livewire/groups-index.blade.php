@@ -80,6 +80,10 @@
                                 <td>{{ $group->end_date }}</td>
 
                                 <td>
+                                    <a href="{{ route('admin.groups.manage', $group->id) }}"
+                                       class="btn btn-sm btn-info">
+                                        <i class="fas fa-users"></i>
+                                    </a>
                                     <a href="{{ route('admin.groups.edit', $group->id) }}"
                                        class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>

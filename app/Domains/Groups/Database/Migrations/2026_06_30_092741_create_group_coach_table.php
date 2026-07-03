@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('coach_id')->constrained()->onDelete('cascade');
             $table->string('role')->default('head');
             $table->boolean('is_primary')->default(true);
-            $table->string('status')->nullable('active');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

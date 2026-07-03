@@ -78,17 +78,12 @@ class GroupController extends Controller
             ]);
     }
 
-    public function players(int $id): View
+    public function manage(int $id): View
     {
-        $group = $this->groupRepository->getPlayers($id);
-        $titlePage = 'لاعبين '.$this->sectionPage;
-        return view('groups::admin.players', compact('group', 'titlePage'));
-    }
-
-    public function coaches(int $id): View
-    {
-        $group = $this->groupRepository->getCoaches($id);
-        $titlePage = 'مدربين '.$this->sectionPage;
-        return view('groups::admin.coaches', compact('group', 'titlePage'));
+        $titlePage = $this->sectionPage . ' - إدارة اللاعبين والمدربين';
+        $sectionPage = $this->sectionPage;
+        $players = $this->groupRepository->getPlayers($id);
+        $coaches = $this->groupRepository->getCoaches($id);
+        return view('groups::admin.manage', compact('players', 'coaches', 'titlePage', 'sectionPage'));
     }
 }

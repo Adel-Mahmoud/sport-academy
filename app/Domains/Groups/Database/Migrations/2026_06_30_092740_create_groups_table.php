@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('sport_id')->constrained()->onDelete('cascade');
             $table->string('description')->nullable();
             $table->string('status')->nullable('active');
+            $table->integer('capacity')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();   
             $table->timestamps();
