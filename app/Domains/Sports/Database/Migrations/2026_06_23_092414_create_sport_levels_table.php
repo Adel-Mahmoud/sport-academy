@@ -8,17 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('sports', function (Blueprint $table) {
+        Schema::create('sport_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('branch_id')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('sport_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sports');
+        Schema::dropIfExists('sport_levels');
     }
 };

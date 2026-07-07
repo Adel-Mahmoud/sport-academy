@@ -9,7 +9,7 @@ class Sport extends Model
     protected $fillable = [
         'name',
         'branch_id',
-        'status'
+        'is_active'
     ];
 
     public function branch()
@@ -18,6 +18,6 @@ class Sport extends Model
     }
     public function scopeActive($query)
     {
-        return $query->where('status', 'active');
+        return $query->where('is_active', true);
     }
 }

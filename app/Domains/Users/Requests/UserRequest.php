@@ -23,6 +23,7 @@ class UserRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore($this->route('user')),
             ],
             'password' => $this->isMethod('post') ? 'required|string|min:6' : 'nullable|string|min:6',
+            'status'   => 'required|in:active,inactive',
             'roles'    => 'required|array',
             'roles.*'  => 'exists:roles,name',
         ];

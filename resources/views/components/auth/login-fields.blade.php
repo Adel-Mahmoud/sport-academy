@@ -13,7 +13,7 @@
             <input type="email"
                 name="email"
                 class="form-control border border-success"
-                value="{{ old('email') }}"
+                value="{{ old('email', $email) }}"
                 @if($emailRequired) required @endif>
             @error('email')
             <span class="text-danger">{{ $message }}</span>

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Sports\Requests;
+namespace App\Domains\Subscriptions\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SportRequest extends FormRequest
+class UpdateSubscriptionRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,8 +15,6 @@ class SportRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'branch_id' => 'nullable|integer|exists:branches,id',
-            'is_active' => 'required|boolean',   
         ];
     }
 }

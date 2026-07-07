@@ -14,6 +14,7 @@ class LoginFields extends Component
     public function __construct(
         public bool $emailRequired = true,
         public bool $passwordRequired = true,
+        public ?string $email = null,
     ) {}
 
     /**

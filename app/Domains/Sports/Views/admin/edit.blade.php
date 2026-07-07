@@ -31,11 +31,11 @@
 
         <div class="col-md-6 mb-3">
             <label class="form-label">الحالة</label>
-            <select name="status" class="form-control" required>
-                <option value="active" {{ old('status', $sport->status) == 'active' ? 'selected' : '' }}>مفعلة</option>
-                <option value="inactive" {{ old('status', $sport->status) == 'inactive' ? 'selected' : '' }}>غير مفعلة</option>
+            <select name="is_active" class="form-control" required>
+                <option value="1" {{ old('is_active', $sport->is_active) == 1 ? 'selected' : '' }}>مفعلة</option>
+                <option value="0" {{ old('is_active', $sport->is_active) == 0 ? 'selected' : '' }}>غير مفعلة</option>
             </select>
-            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
     </div>

@@ -25,8 +25,16 @@
             <input type="password" name="password" class="form-control" required>
             @error('password') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-
         <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة</label>
+            <select name="status" class="form-control" required>
+                <option value="">اختر الحالة</option>
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>نشط</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>غير نشط</option>
+            </select>
+            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+        <div class="col-md-12 mb-3">
             <label class="form-label">الأدوار</label>
             <select name="roles[]" class="form-control" multiple required>
                 @foreach($roles as $role)

@@ -7,7 +7,7 @@ class UpdateSportData
     public function __construct(
         public string $name,
         public int $branch_id,
-        public string $status = 'active'
+        public bool $is_active = true
     ) {}
 
     public static function fromArray(array $data): self
@@ -15,7 +15,7 @@ class UpdateSportData
         return new self(
             name: $data['name'],
             branch_id: $data['branch_id'],
-            status: $data['status'] ?? 'active'
+            is_active: $data['is_active'] ?? true
         );
     }
 
@@ -24,7 +24,7 @@ class UpdateSportData
         return [
             'name' => $this->name,
             'branch_id' => $this->branch_id,
-            'status' => $this->status,
+            'is_active' => $this->is_active,
         ];
     }
 }

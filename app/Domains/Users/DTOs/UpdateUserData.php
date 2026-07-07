@@ -9,6 +9,7 @@ class UpdateUserData
         public readonly string $name,
         public readonly string $email,
         public readonly ?string $password = null,
+        public readonly ?string $status = null,
         public readonly array $roles = [],
     ) {}
 
@@ -19,6 +20,7 @@ class UpdateUserData
             name: $data['name'],
             email: $data['email'],
             password: $data['password'] ?? null,
+            status: $data['status'] ?? null,
             roles: $data['roles'] ?? [],
         );
     }

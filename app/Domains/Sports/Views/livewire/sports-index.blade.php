@@ -57,7 +57,7 @@
                             <td>{{ $sport->name }}</td>
                             <td>{{ $sport->branch->name ?? 'غير محدد' }}</td>
                             <td>
-                                @if($sport->status == 'active')
+                                @if($sport->is_active)
                                 <span class="badge bg-success">نشط</span>
                                 @else
                                 <span class="badge bg-danger">غير نشط</span>

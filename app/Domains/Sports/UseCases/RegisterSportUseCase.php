@@ -21,7 +21,7 @@ class RegisterSportUseCase
             $sport = $this->sportRepository->create([
                 'name' => $sportData->name,
                 'branch_id' => $sportData->branch_id,
-                'status' => $sportData->status,
+                'is_active' => $sportData->is_active,
             ]);
 
             return $sport;

@@ -19,7 +19,7 @@
 
     <div class="row">
 
-        <x-auth.login-fields :emailRequired="true" :passwordRequired="false" />
+        <x-auth.login-fields :emailRequired="false" :email="$player->user->email" :passwordRequired="false" />
 
         <!--  Basic Data Header -->
         <div class="col-12 mb-3 mt-4">

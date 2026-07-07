@@ -9,6 +9,7 @@
 
 @section('content')
 <x-form
+id="multiStepForm"
     :action="route('admin.players.store')"
     submitLabel="إضافة لاعب جديد"
     cancelRoute="admin.players.index"
@@ -17,63 +18,54 @@
 
         <x-auth.login-fields />
 
-        <!--  Basic Data Header -->
         <div class="col-12 mb-3 mt-4">
             <div class="bg-primary text-white p-2 rounded">
                 <strong>البيانات الأساسية</strong>
             </div>
         </div>
 
-        <!-- Name -->
         <div class="col-md-6 mb-3">
             <label class="form-label">الاسم</label>
             <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Phone -->
         <div class="col-md-6 mb-3">
             <label class="form-label">رقم الهاتف</label>
             <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
             @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- School -->
         <div class="col-md-6 mb-3">
             <label class="form-label">المدرسة</label>
             <input type="text" name="school" class="form-control" value="{{ old('school') }}">
             @error('school') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- National ID -->
         <div class="col-md-6 mb-3">
             <label class="form-label">الهوية الوطنية</label>
             <input type="text" name="national_id" class="form-control" value="{{ old('national_id') }}" required>
             @error('national_id') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Age -->
         <div class="col-md-4 mb-3">
             <label class="form-label">العمر</label>
             <input type="number" name="age" class="form-control" value="{{ old('age') }}" required>
             @error('age') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Weight -->
         <div class="col-md-4 mb-3">
             <label class="form-label">الوزن</label>
             <input type="number" step="0.1" name="weight" class="form-control" value="{{ old('weight') }}">
             @error('weight') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Height -->
         <div class="col-md-4 mb-3">
             <label class="form-label">الطول</label>
             <input type="number" step="0.1" name="height" class="form-control" value="{{ old('height') }}">
             @error('height') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Blood Type -->
         <div class="col-md-6 mb-3">
             <label class="form-label">فصيلة الدم</label>
             <select name="blood_type" class="form-control">
@@ -90,7 +82,6 @@
             @error('blood_type') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Gender -->
         <div class="col-md-6 mb-3">
             <label class="form-label">الجنس</label>
             <select name="gender" class="form-control" required>
@@ -101,7 +92,6 @@
             @error('gender') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Image -->
         <div class="col-md-12 mb-3">
             <label class="form-label">الصورة الشخصية</label>
             <input type="file"
@@ -112,14 +102,12 @@
             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Address -->
         <div class="col-md-12 mb-3">
             <label class="form-label">العنوان</label>
             <textarea name="address" rows="2" class="form-control">{{ old('address') }}</textarea>
             @error('address') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Description -->
         <div class="col-md-12 mb-3">
             <label class="form-label">الوصف</label>
             <textarea name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
