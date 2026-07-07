@@ -1,0 +1,31 @@
+Schema::create('membership_tiers', function (Blueprint $table) {
+    table->id();
+    table->string('name'); // مثلاً: Internal, External, VIP
+    table->string('display_name'); // اسم العرض: طالب داخلي، لاعب خارجي، لاعب مميز
+    table->decimal('price', 8, 2); // سعر الاشتراك الخاص بهذه الفئة
+    table->timestamps();
+});
+//////
+Schema::create('subscription_plans', function (Blueprint $table) {
+    $table->id();
+    // ربط الفئة (داخلي، خارجي، مميز)
+    $table->foreignId('membership_tier_id')->constrained('membership_tiers')->onDelete('cascade');
+    
+    // نوع المدة: monthly, yearly, per_session
+    $table->string('duration_type'); 
+    
+    // السعر الخاص بهذه التوليفة
+    $table->decimal('price', 8, 2); 
+    $table->timestamps();
+});
+///////
+Schema::create('player_subscriptions', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('player_id')->constrained('players');
+    $table->foreignId('subscription_plan_id')->constrained('subscription_plans');
+    $table->date('start_date');
+    $table->date('end_date')->nullable(); // يكون null لو كان الاشتراك "بالحصة"
+    $table->integer('remaining_sessions')->default(0); // يُستخدم فقط إذا كان الاشتراك "بالحصة"
+    $table->enum('status', ['active', 'expired', 'cancelled']);
+    $table->timestamps();
+});
