@@ -40,6 +40,7 @@ class RegisterPlayerUseCase
                 'description' => $playerData->description ?? null,
                 'image' => $tempImagePath ? $tempImagePath : null,
                 'national_id' => $playerData->national_id,
+                'is_active' => $playerData->is_active ?? true,
             ]);
 
             // DB::afterCommit(function () use ($player, $tempImagePath) {

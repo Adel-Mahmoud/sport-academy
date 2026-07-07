@@ -16,6 +16,8 @@ class CreatePlayerData
         public ?string $address = null,
         public ?string $description = null,
         public ?string $location = null,
+        public ?string $image = null,
+        public ?bool $is_active = true,
     ) {}
 
     public static function fromArray(array $data): self
@@ -33,6 +35,8 @@ class CreatePlayerData
             address: $data['address'] ?? null,
             description: $data['description'] ?? null,
             location: $data['location'] ?? null,
+            image: $data['image'] ?? null,
+            is_active: $data['is_active'] ?? true,
         );
     }
 }

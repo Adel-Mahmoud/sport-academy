@@ -78,6 +78,13 @@
                                 @endif
                             </td>
                             <td>{{ $player->national_id }}</td>
+                            <td>
+                                @if($player->is_active)
+                                    <span class="badge bg-success">نشط</span>
+                                @else
+                                    <span class="badge bg-secondary">غير نشط</span>
+                                @endif
+                            </td>
                             <td>{{ $player->created_at->format('Y-m-d') }}</td>
                             <td>
                                 <a href="{{ route('admin.players.edit', $player->id) }}" class="btn btn-sm btn-warning">

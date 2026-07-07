@@ -126,7 +126,16 @@
             <textarea name="description" rows="3" class="form-control">{{ old('description', $player->description) }}</textarea>
             @error('description') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-
+        
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة</label>
+            <select name="is_active" class="form-control" required>
+                <option value="">اختر الحالة</option>
+                <option value="1" {{ old('is_active', $player->is_active) == '1' ? 'selected' : '' }}>نشط</option>
+                <option value="0" {{ old('is_active', $player->is_active) == '0' ? 'selected' : '' }}>غير نشط</option>
+            </select>
+            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
     </div>
 
 </x-form>

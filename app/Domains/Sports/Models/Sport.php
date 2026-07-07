@@ -20,4 +20,9 @@ class Sport extends Model
     {
         return $query->where('is_active', true);
     }
+
+    public function levels()
+    {
+        return $this->hasMany(SportLevel::class);
+    }
 }

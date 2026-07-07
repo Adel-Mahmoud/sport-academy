@@ -32,6 +32,8 @@ class UpdatePlayerRequest extends FormRequest
             'address'     => 'nullable|string',
             'location'    => 'nullable|string',
             'description' => 'nullable|string',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'is_active'   => 'nullable|boolean',
         ];
     }
 }

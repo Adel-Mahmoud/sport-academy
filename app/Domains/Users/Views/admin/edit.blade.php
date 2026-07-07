@@ -28,7 +28,15 @@
             <input type="password" name="password" class="form-control">
             @error('password') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
-
+        <div class="col-md-6 mb-3">
+            <label class="form-label">الحالة</label>
+            <select name="is_active" class="form-control" required>
+                <option value="">اختر الحالة</option>
+                <option value="1" {{ old('is_active', $user->is_active) == '1' ? 'selected' : '' }}>نشط</option>
+                <option value="0" {{ old('is_active', $user->is_active) == '0' ? 'selected' : '' }}>غير نشط</option>
+            </select>
+            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">الأدوار</label>
             <select name="roles[]" class="form-control" multiple>

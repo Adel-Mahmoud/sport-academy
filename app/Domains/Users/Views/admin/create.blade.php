@@ -27,12 +27,12 @@
         </div>
         <div class="col-md-6 mb-3">
             <label class="form-label">الحالة</label>
-            <select name="status" class="form-control" required>
+            <select name="is_active" class="form-control" required>
                 <option value="">اختر الحالة</option>
-                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>نشط</option>
-                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>غير نشط</option>
+                <option value="1" {{ old('is_active') == '1' ? 'selected' : '' }}>نشط</option>
+                <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>غير نشط</option>
             </select>
-            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md-12 mb-3">
             <label class="form-label">الأدوار</label>

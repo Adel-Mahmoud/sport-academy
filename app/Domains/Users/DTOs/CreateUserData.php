@@ -8,7 +8,8 @@ class CreateUserData
         public readonly string $name,
         public readonly string $email,
         public readonly string $password,
-        public readonly string $status,
+        public readonly ?string $type = 'user',
+        public readonly ?bool $is_active = true,
         public readonly array $roles = [],
     ) {}
 
@@ -18,7 +19,8 @@ class CreateUserData
             name: $data['name'],
             email: $data['email'],
             password: $data['password'],
-            status: $data['status'],
+            type: $data['type'] ?? 'user',
+            is_active: $data['is_active'] ?? true,
             roles: $data['roles'] ?? [],
         );
     }

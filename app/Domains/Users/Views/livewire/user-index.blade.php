@@ -38,6 +38,7 @@
                             <th>الاسم</th>
                             <th>البريد الإلكتروني</th>
                             <th>الادوار</th>
+                            <th>الحالة</th>
                             <th>تاريخ الإنشاء</th>
                             <th width="150">الإجراءات</th>
                         </tr>
@@ -60,6 +61,13 @@
                                     {{ $role->name }}
                                 </a>
                                 @endforeach
+                            </td>
+                            <td>
+                                @if($user->is_active)
+                                <span class="badge bg-success">نشط</span>
+                                @else
+                                <span class="badge bg-danger">غير نشط</span>
+                                @endif
                             </td>
                             <td>{{ $user->created_at->format('Y-m-d') }}</td>
                             <td>

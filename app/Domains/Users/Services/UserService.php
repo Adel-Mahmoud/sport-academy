@@ -16,7 +16,8 @@ class UserService
             'name'     => $data->name,
             'email'    => $data->email,
             'password' => Hash::make($data->password),
-            'status'   => $data->status,
+            'type'     => $data->type,
+            'is_active' => $data->is_active,
         ]);
 
         if (!empty($data->roles)) {
@@ -41,7 +42,8 @@ class UserService
             'name'     => $data->name,
             'email'    => $data->email,
             'password' => !is_null($data->password) ? Hash::make($data->password) : $user->password,
-            'status'   => $data->status,
+            'type'     => $data->type,
+            'is_active' => $data->is_active,
         ]);
 
         if (!empty($data->roles)) {

@@ -29,6 +29,7 @@ class StorePlayerRequest extends FormRequest
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'national_id' => 'required|string|unique:players,national_id',
+            'is_active'   => 'nullable|boolean',
         ];
     }
 }

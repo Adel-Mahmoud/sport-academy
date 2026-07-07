@@ -21,7 +21,7 @@ class Player extends Model
         'description',
         'image',
         'national_id',
-        'status',
+        'is_active',
     ];
 
     public function user()
@@ -41,5 +41,15 @@ class Player extends Model
         return $this->belongsToMany(\App\Domains\Groups\Models\Group::class, 'group_player', 'player_id', 'group_id')
             ->withPivot('joined_at', 'status')
             ->withTimestamps();
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('is_active', false);
     }
 }

@@ -37,4 +37,36 @@ class PlayerRepository
     {
         return Player::destroy($id);
     }
+
+    public function getPlayersByGroupId(int $groupId)
+    {
+        return Player::whereHas('groups', function ($query) use ($groupId) {
+            $query->where('group_id', $groupId);
+        })->get();
+    }
+
+    public function getPlayersByCoachId(int $coachId)
+    {
+        return Player::whereHas('coaches', function ($query) use ($coachId) {
+            $query->where('coach_id', $coachId);
+        })->get();
+    }
+
+    public function getPlayersBySportId(int $sportId)
+    {
+        return Player::whereHas('groups', function ($query) use ($sportId) {
+            $query->where('sport_id', $sportId);
+        })->get();
+    }
+
+    public function activePlayers()
+    {
+        return Player::active()->get();
+    }
+
+    public function inactivePlayers()
+    {
+        return Player::inactive()->get();
+    }
+
 }

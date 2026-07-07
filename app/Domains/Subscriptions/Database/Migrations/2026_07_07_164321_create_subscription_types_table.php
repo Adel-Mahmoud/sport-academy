@@ -4,15 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('subscription_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('type')->default('user');
+            $table->string('code')->unique();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -20,6 +19,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('subscription_types');
     }
 };
