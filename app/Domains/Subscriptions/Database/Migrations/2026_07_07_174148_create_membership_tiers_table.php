@@ -8,12 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('subscription_types', function (Blueprint $table) {
+        Schema::create('membership_tiers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code')->unique();
-            $table->boolean('uses_duration')->default(true);
-            $table->boolean('uses_sessions')->default(false);
+            $table->string('display_name');
+            $table->unsignedInteger('sort_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
@@ -21,6 +20,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('subscription_types');
+        Schema::dropIfExists('membership_tiers');
     }
 };
