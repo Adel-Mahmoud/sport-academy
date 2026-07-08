@@ -1,31 +1,45 @@
-Schema::create('membership_tiers', function (Blueprint $table) {
-    table->id();
-    table->string('name'); // مثلاً: Internal, External, VIP
-    table->string('display_name'); // اسم العرض: طالب داخلي، لاعب خارجي، لاعب مميز
-    table->decimal('price', 8, 2); // سعر الاشتراك الخاص بهذه الفئة
-    table->timestamps();
-});
-//////
 Schema::create('subscription_plans', function (Blueprint $table) {
     $table->id();
-    // ربط الفئة (داخلي، خارجي، مميز)
-    $table->foreignId('membership_tier_id')->constrained('membership_tiers')->onDelete('cascade');
+    $table->foreignId('sport_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('sport_level_id')->nullable()->constrained()->nullOnDelete();
+    $table->foreignId('membership_tier_id')->nullable()->constrained()->nullOnDelete();
+    $table->foreignId('subscription_type_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('group_id')->nullable()->constrained()->nullOnDelete();
     
-    // نوع المدة: monthly, yearly, per_session
-    $table->string('duration_type'); 
-    
-    // السعر الخاص بهذه التوليفة
-    $table->decimal('price', 8, 2); 
+    // تفاصيل الخطة الثابتة (المرجع)
+    $table->decimal('price', 10, 2);
+    $table->unsignedInteger('sessions')->nullable();
+    $table->unsignedInteger('duration')->nullable();
+    $table->string('duration_unit')->nullable();
+    $table->boolean('is_active')->default(true);
     $table->timestamps();
+
+    // نقل قيد الفريد إلى مكانه الصحيح هنا
+    $table->unique([
+        'sport_id',
+        'sport_level_id',
+        'membership_tier_id',
+        'subscription_type_id',
+        'group_id',
+    ], 'subscription_plan_unique');
 });
 ///////
 Schema::create('player_subscriptions', function (Blueprint $table) {
     $table->id();
-    $table->foreignId('player_id')->constrained('players');
-    $table->foreignId('subscription_plan_id')->constrained('subscription_plans');
+    $table->foreignId('player_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('subscription_plan_id')->constrained()->cascadeOnDelete();
+    
+    // تفاصيل الاشتراك الفعلي للاعب (الفاتورة)
     $table->date('start_date');
-    $table->date('end_date')->nullable(); // يكون null لو كان الاشتراك "بالحصة"
-    $table->integer('remaining_sessions')->default(0); // يُستخدم فقط إذا كان الاشتراك "بالحصة"
-    $table->enum('status', ['active', 'expired', 'cancelled']);
+    $table->date('end_date')->nullable();
+    $table->unsignedInteger('remaining_sessions')->default(0); // يتم تعبئتها من حقل sessions الخاص بالخطة عند الشراء
+    
+    // الحسابات المالية اللحظية للاعب
+    $table->decimal('price', 10, 2); // السعر وقت الشراء (لحمايته من التغيير المستقبلي في الخطة)
+    $table->decimal('discount', 10, 2)->default(0);
+    $table->decimal('paid_amount', 10, 2)->default(0);
+    
+    $table->string('status')->default('pending');
+    $table->text('notes')->nullable();
     $table->timestamps();
 });
