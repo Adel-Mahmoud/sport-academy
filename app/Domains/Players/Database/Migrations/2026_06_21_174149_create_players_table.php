@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('national_id')->nullable()->unique();
-            $table->boolean('is_active')->nullable()->default(true);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

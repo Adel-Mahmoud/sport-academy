@@ -32,4 +32,14 @@ class CoachRepository
     {
         return Coach::destroy($id);
     }
+
+    public function getActive()
+    {
+        return Coach::active()->get();
+    }
+
+    public function getInactive()
+    {
+        return Coach::inactive()->get();
+    }
 }

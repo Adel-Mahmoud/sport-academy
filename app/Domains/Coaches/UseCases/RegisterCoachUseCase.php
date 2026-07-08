@@ -29,9 +29,9 @@ class RegisterCoachUseCase
                 'user_id' => $user->id,
                 'name' => $coachData->name,
                 'phone' => $coachData->phone,
-                'email' => $coachData->email,
                 'hire_date' => $coachData->hire_date,
                 'salary' => $coachData->salary,
+                'is_active' => $coachData->is_active ?? true,
             ]);
 
             return $coach;

@@ -24,6 +24,7 @@ class UpdateCoachRequest extends FormRequest
             'password'    => 'nullable|string|min:8',
             'hire_date' => 'required|date',
             'salary'    => 'required|numeric|min:0',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }

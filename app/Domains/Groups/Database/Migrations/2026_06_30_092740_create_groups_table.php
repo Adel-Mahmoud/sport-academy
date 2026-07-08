@@ -14,10 +14,10 @@ return new class extends Migration
             $table->string('level');
             $table->foreignId('sport_id')->constrained()->onDelete('cascade');
             $table->string('description')->nullable();
-            $table->string('status')->nullable('active');
             $table->integer('capacity')->default(0);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();   
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

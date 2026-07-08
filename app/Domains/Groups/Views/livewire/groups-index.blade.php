@@ -71,9 +71,9 @@
                                 <td>{{ $group->sport?->name }}</td>
                                 <td>{{ $group->level }}</td>
                                 <td>{{ $group->description }}</td>
-                                @if($group->status === 'active')
+                                @if($group->is_active === 1)
                                     <td><span class="badge bg-success">نشط</span></td>
-                                @elseif($group->status === 'inactive')
+                                @else
                                     <td><span class="badge bg-danger">غير نشط</span></td>
                                 @endif
                                 <td>{{ $group->start_date }}</td>

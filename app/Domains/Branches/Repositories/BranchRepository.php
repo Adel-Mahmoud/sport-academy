@@ -37,4 +37,19 @@ class BranchRepository
     {
         return Branch::destroy($id);
     }
+
+    public function getSports(int $branchId)
+    {
+        return Branch::findOrFail($branchId)->sports()->get();
+    }
+
+    public function active()
+    {
+        return Branch::active()->get();
+    }
+
+    public function inactive()
+    {
+        return Branch::inactive()->get();
+    }
 }

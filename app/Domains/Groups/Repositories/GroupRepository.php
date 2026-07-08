@@ -53,4 +53,13 @@ class GroupRepository
         Group::destroy($id);
     }
 
+    public function getActive()
+    {
+        return Group::active()->get();
+    }
+
+    public function getInactive()
+    {
+        return Group::inactive()->get();
+    }
 }

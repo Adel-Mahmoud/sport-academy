@@ -53,6 +53,7 @@
                             <th>البريد الإلكتروني</th>
                             <th>تاريخ التعيين</th>
                             <th>الراتب</th>
+                            <th>الحالة</th>
                             <th width="150">الإجراءات</th>
                         </tr>
                     </thead>
@@ -86,6 +87,14 @@
 
                                 <td>{{ number_format($coach->salary, 2) }}</td>
 
+                                <td>
+                                    @if($coach->is_active)
+                                        <span class="badge bg-success">نشط</span>
+                                    @else
+                                        <span class="badge bg-danger">غير نشط</span>
+                                    @endif
+                                </td>
+                                
                                 <td>
                                     <a href="{{ route('admin.coaches.edit', $coach->id) }}"
                                        class="btn btn-sm btn-warning">

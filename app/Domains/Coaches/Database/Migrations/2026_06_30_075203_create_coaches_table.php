@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->date('hire_date');
             $table->decimal('salary', 10, 2);
-            $table->string('status')->nullable('active');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

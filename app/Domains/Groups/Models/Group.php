@@ -20,7 +20,14 @@ class Group extends Model
         'description',
         'status',
         'start_date',
-        'end_date'
+        'end_date',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'is_active' => 'boolean',
     ];
 
     public function sport(): BelongsTo
@@ -45,6 +52,16 @@ class Group extends Model
         return $this->belongsToMany(Player::class, 'group_player', 'group_id', 'player_id')
             ->withPivot('joined_at', 'status')
             ->withTimestamps();
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('is_active', false);
     }
 
 }

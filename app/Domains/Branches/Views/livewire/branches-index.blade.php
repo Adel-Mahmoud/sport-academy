@@ -68,7 +68,7 @@
                                 <td>{{ $branch->location }}</td>
 
                                 <td>
-                                    @if($branch->status)
+                                    @if($branch->is_active)
                                         <span class="badge badge-success">نشط</span>
                                     @else
                                         <span class="badge badge-danger">غير نشط</span>

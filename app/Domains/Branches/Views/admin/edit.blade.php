@@ -24,9 +24,9 @@
             @error('location') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md-6 mb-3 form-check d-flex align-items-center justify-content-start">
-            <label class="form-label ml-1" for="status">الحالة</label>
-            <input type="checkbox" name="status" id="status" value="1" {{ old('status', $branch->status) ? 'checked' : '' }}>
-            @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+            <label class="form-label ml-1" for="is_active">الحالة</label>
+            <input type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', $branch->is_active) ? 'checked' : '' }}>
+            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
     </div>
 </x-form>

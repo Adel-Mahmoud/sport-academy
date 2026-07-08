@@ -13,7 +13,6 @@ return new class extends Migration
             $table->foreignId('group_id')->constrained()->onDelete('cascade');
             $table->foreignId('player_id')->constrained()->onDelete('cascade');
             $table->date('joined_at')->nullable();
-            $table->string('status')->default('active');
             $table->timestamps();
             $table->unique(['group_id', 'player_id']); 
         });
