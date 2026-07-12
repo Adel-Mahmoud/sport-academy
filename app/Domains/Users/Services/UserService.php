@@ -42,7 +42,7 @@ class UserService
             'name'     => $data->name,
             'email'    => $data->email,
             'password' => !is_null($data->password) ? Hash::make($data->password) : $user->password,
-            'type'     => $data->type,
+            'type'     => $data->type ?? $user->type,
             'is_active' => $data->is_active,
         ]);
 

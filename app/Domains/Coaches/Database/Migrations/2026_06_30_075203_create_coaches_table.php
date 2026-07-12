@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('phone')->nullable();
-            $table->string('email')->unique();
             $table->date('hire_date');
             $table->decimal('salary', 10, 2);
             $table->boolean('is_active')->default(true);

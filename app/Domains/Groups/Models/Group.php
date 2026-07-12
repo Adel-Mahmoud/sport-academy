@@ -18,7 +18,7 @@ class Group extends Model
         'name',
         'level',
         'description',
-        'status',
+        'is_active',
         'start_date',
         'end_date',
         'is_active',
@@ -43,14 +43,14 @@ class Group extends Model
     public function coaches(): BelongsToMany
     {
         return $this->belongsToMany(Coach::class, 'group_coach', 'group_id', 'coach_id')
-            ->withPivot('role', 'is_primary', 'status')
+            ->withPivot('role', 'is_primary', 'is_active')
             ->withTimestamps();
     }
 
     public function players(): BelongsToMany
     {
         return $this->belongsToMany(Player::class, 'group_player', 'group_id', 'player_id')
-            ->withPivot('joined_at', 'status')
+            ->withPivot('joined_at', 'is_active')
             ->withTimestamps();
     }
 

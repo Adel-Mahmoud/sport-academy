@@ -8,12 +8,14 @@ class Branch extends Model
 {
     protected $fillable = [
         'name',
-        'location',
+        'address',
+        'phone',
         'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'phone' => 'string',
     ];
 
     public function sports()

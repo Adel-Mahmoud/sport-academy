@@ -14,10 +14,15 @@
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md-6 mb-3">
-            <label class="form-label">الموقع</label>
-            <input type="text" name="location" class="form-control" value="{{ old('location') }}" required>
-            @error('location') <span class="text-danger">{{ $message }}</span> @enderror
+            <label class="form-label">العنوان</label>
+            <input type="text" name="address" class="form-control" value="{{ old('address') }}" required>
+            @error('address') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
+        <div class="col-md-6 mb-3">
+            <label class="form-label">رقم الهاتف</label>
+            <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
+            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>  
         <div class="col-md-6 mb-3 form-check d-flex align-items-center justify-content-start">
             <label class="form-label ml-1" for="is_active">الحالة</label>
             <input type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', 'checked') ? 'checked' : '' }}>

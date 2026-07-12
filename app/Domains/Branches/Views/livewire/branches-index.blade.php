@@ -43,7 +43,8 @@
                             </th>
                             <th>#</th>
                             <th>الاسم</th>
-                            <th>الموقع</th>
+                            <th>العنوان</th>
+                            <th>رقم الهاتف</th>
                             <th>الحالة</th>
                             <th width="150">الإجراءات</th>
                         </tr>
@@ -65,7 +66,9 @@
 
                                 <td>{{ $branch->name }}</td>
 
-                                <td>{{ $branch->location }}</td>
+                                <td>{{ $branch->address }}</td>
+
+                                <td>{{ $branch->phone }}</td>
 
                                 <td>
                                     @if($branch->is_active)

@@ -59,12 +59,12 @@ class PlayerRepository
         })->get();
     }
 
-    public function activePlayers()
+    public function getActive()
     {
         return Player::active()->get();
     }
 
-    public function inactivePlayers()
+    public function getInactive()
     {
         return Player::inactive()->get();
     }

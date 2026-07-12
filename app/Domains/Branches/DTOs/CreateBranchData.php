@@ -6,7 +6,8 @@ class CreateBranchData
 {
     public function __construct(
         public string $name,
-        public string $location,
+        public string $address,
+        public ?string $phone = null,
         public ?bool $is_active = true,
     ) {}
 
@@ -14,7 +15,8 @@ class CreateBranchData
     {
         return new self(
             name: $data['name'],
-            location: $data['location'],
+            address: $data['address'],
+            phone: $data['phone'],
             is_active: $data['is_active'] ?? true
         );
     }
@@ -23,7 +25,8 @@ class CreateBranchData
     {
         return [
             'name' => $this->name,
-            'location' => $this->location,
+            'address' => $this->address,
+            'phone' => $this->phone,
             'is_active' => $this->is_active,
         ];
     }

@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('type')->default('user');
+            $table->string('type')->default('admin');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
