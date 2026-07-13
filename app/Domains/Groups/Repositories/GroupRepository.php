@@ -3,6 +3,7 @@
 namespace App\Domains\Groups\Repositories;
 
 use App\Domains\Groups\Models\Group;
+use App\Domains\Players\Models\Player;
 
 class GroupRepository
 {
@@ -25,7 +26,7 @@ class GroupRepository
     {
         return Group::findOrFail($groupId)->coaches()->paginate(20);
     }
-    
+
     // public function getBranches()
     // {
     //     return Group::select('branch_id')->distinct()->get();
@@ -61,5 +62,25 @@ class GroupRepository
     public function getInactive()
     {
         return Group::inactive()->get();
+    }
+
+    public function getGroupPlayers(int $groupId)
+    {
+        return Group::findOrFail($groupId)
+            ->players()
+            ->wherePivot('is_active', true)
+            ->latest('players.name')
+            ->get();
+    }
+
+    public function getAvailablePlayers(int $groupId)
+    {
+        return Player::active()
+            ->whereDoesntHave('groups', function ($query) use ($groupId) {
+                $query->where('groups.id', $groupId)
+                    ->wherePivot('is_active', true);
+            })
+            ->orderBy('name')
+            ->get();
     }
 }

@@ -3,49 +3,28 @@
 namespace App\Domains\Groups\Livewire;
 
 use Livewire\Component;
-use App\Domains\Coaches\Repositories\CoachRepository;
-use App\Domains\Players\Repositories\PlayerRepository;
-use App\Domains\Groups\Repositories\GroupRepository;
-
+use App\Domains\Groups\Actions\GetGroupPlayersAction;
+use App\Domains\Groups\Actions\GetAvailablePlayersAction;
 
 class GroupManager extends Component
 {
-    public array $selectedPlayers = [];
+    protected GetGroupPlayersAction $getGroupPlayers;
+    protected GetAvailablePlayersAction $getAvailablePlayers;
 
-    public ?int $targetGroupId = null;
-
-    public int $groupId;
-
-    public CoachRepository $coachRepository;
-
-    public PlayerRepository $playerRepository;
-
-    protected GroupRepository $groupRepository;
-
-    public function mount(
-        int $groupId,
-        CoachRepository $coachRepository,
-        PlayerRepository $playerRepository,
-        GroupRepository $groupRepository
+    public function boot(
+        GetGroupPlayersAction $getGroupPlayers,
+        GetAvailablePlayersAction $getAvailablePlayers
     ) {
-        $this->groupId = $groupId;
-
-        $this->coachesRepository = $coachRepository;
-        $this->playerRepository = $playerRepository;
-        $this->groupRepository = $groupRepository;
-
-        $this->groups = $groupRepository->all();
-
-        // التحديد الافتراضي
-        $this->targetGroupId = $groupId;
+        $this->getGroupPlayers = $getGroupPlayers;
+        $this->getAvailablePlayers = $getAvailablePlayers;
     }
+
     public function render()
     {
-        $coaches = $this->coachesRepository->getActive();
-        $players = $this->playerRepository->getActive();
         return view('groups::livewire.groups-manager', [
-            'coaches' => $coaches,
-            'players' => $players
+            'coaches' => $this->coachesRepository->getActive(),
+            'currentPlayers' => $this->getGroupPlayers->handle($this->groupId),
+            'availablePlayers' => $this->getAvailablePlayers->handle($this->groupId),
         ]);
     }
 }

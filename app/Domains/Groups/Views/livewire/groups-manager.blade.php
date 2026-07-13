@@ -6,10 +6,10 @@
                     <!-- Tabs -->
                     <ul class="nav panel-tabs main-nav-line">
                         <li><a href="#tab4" class="nav-link" data-toggle="tab">
-                                ادارة مدربين المجموعة
+                                ادارة لاعبين المجموعة
                             </a></li>
                         <li><a href="#tab5" class="nav-link active" data-toggle="tab">
-                                ادارة لاعبين المجموعة
+                                  اضافة لاعبين جدد للمجموعة
                             </a></li>
                         <li><a href="#tab6" class="nav-link" data-toggle="tab">Tab 03</a></li>
                     </ul>
@@ -28,15 +28,6 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody>
-                                            @foreach ($coaches as $coach)
-                                            <tr>
-
-                                                <td>{{ $coach->name }}</td>
-
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -57,7 +48,6 @@
                                         <tbody>
                                             @foreach ($players as $player)
                                             <tr>
-
                                                 <td>{{ $player->name }}</td>
                                                 <td>
                                                     <div class="custom-control custom-checkbox">
