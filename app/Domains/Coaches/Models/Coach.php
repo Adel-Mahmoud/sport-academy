@@ -27,7 +27,7 @@ class Coach extends Model
     public function groups()
     {
         return $this->belongsToMany(\App\Domains\Groups\Models\Group::class, 'group_coach', 'coach_id', 'group_id')
-            ->withPivot('role', 'is_primary', 'status')
+            ->withPivot('role', 'is_primary', 'is_active')
             ->withTimestamps();
     }
 
