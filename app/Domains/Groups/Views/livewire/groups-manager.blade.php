@@ -1,81 +1,210 @@
 <div class="text-wrap">
     <div class="example">
-        <div class="panel panel-primary tabs-style-2">
-            <div class=" tab-menu-heading">
-                <div class="tabs-menu1">
-                    <!-- Tabs -->
-                    <ul class="nav panel-tabs main-nav-line">
-                        <li><a href="#tab4" class="nav-link" data-toggle="tab">
-                                ادارة لاعبين المجموعة
-                            </a></li>
-                        <li><a href="#tab5" class="nav-link active" data-toggle="tab">
-                                  اضافة لاعبين جدد للمجموعة
-                            </a></li>
-                        <li><a href="#tab6" class="nav-link" data-toggle="tab">Tab 03</a></li>
+        <div class="text-wrap">
+            <div class="example">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
                     </ul>
                 </div>
-            </div>
-            <div class="panel-body tabs-menu-body main-content-body-right border">
-                <div class="tab-content">
-                    <div class="tab-pane" id="tab4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table text-md-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>الاسم</th>
-                                            </tr>
-                                        </thead>
+                @endif
 
-                                    </table>
-                                </div>
-                            </div>
+                <div class="panel panel-primary tabs-style-2">
+                    <div class="tab-menu-heading">
+                        <div class="tabs-menu1">
+                            <!-- Tabs -->
+                            <ul class="nav panel-tabs main-nav-line">
+                                <li><a href="#tab4" class="nav-link active" data-toggle="tab">إدارة ونقل لاعبين المجموعة</a></li>
+                                <li><a href="#tab5" class="nav-link" data-toggle="tab">إضافة لاعبين جدد للمجموعة</a></li>
+                                <li><a href="#tab6" class="nav-link" data-toggle="tab">مدربين المجموعة</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="tab-pane active" id="tab5">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table text-md-nowrap table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>الاسم</th>
-                                                <th>تحديد</th>
-                                            </tr>
-                                        </thead>
 
-                                        <tbody>
-                                            @foreach ($players as $player)
-                                            <tr>
-                                                <td>{{ $player->name }}</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox"
-                                                            class="custom-control-input"
-                                                            id="player{{ $player->id }}"
-                                                            value="{{ $player->id }}"
-                                                            wire:model.live="selectedPlayers">
-                                                        <label class="custom-control-label"
-                                                            for="player{{ $player->id }}">
-                                                        </label>
-                                                    </div>
-                                                </td>
+                    <div class="panel-body tabs-menu-body main-content-body-right border">
+                        <div class="tab-content">
 
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                            <div class="tab-pane active" id="tab4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if ($currentPlayers->isNotEmpty())
+                                        <form action="{{ route('admin.groups.transferPlayers') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="from_group_id" value="{{ $groupId }}">
+
+                                            <div class="table-responsive">
+                                                <table class="table text-md-nowrap table-striped align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>الاسم</th>
+                                                            <th class="text-center">
+                                                                <input type="checkbox" id="selectAllCurrent" class="select-all-trigger" data-target="current_player_check">
+                                                                <label for="selectAllCurrent" class="mb-0 ms-1">تحديد الكل</label>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($currentPlayers as $player)
+                                                        <tr>
+                                                            <td>{{ $player->name }}</td>
+                                                            <td class="text-center">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox"
+                                                                        class="custom-control-input current_player_check"
+                                                                        id="current_player_{{ $player->id }}"
+                                                                        value="{{ $player->id }}"
+                                                                        name="player_ids[]">
+                                                                    <label class="custom-control-label" for="current_player_{{ $player->id }}"></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            @if ($getOtherGroupsInSameSport->isNotEmpty())
+                                            <div class="d-flex align-items-center justify-content-center gap-2 mt-4">
+                                                <select name="target_group_id" class="form-control w-auto" required>
+                                                    <option value="" disabled selected>-- اختر المجموعة المراد النقل إليها --</option>
+                                                    @foreach($getOtherGroupsInSameSport as $group)
+                                                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                                    @endforeach
+                                                </select>
+
+                                                <button type="submit" class="btn btn-primary submit d-inline-flex align-items-center gap-2">
+                                                    نقل اللاعبين المحددين
+                                                </button>
+                                            </div>
+                                            @else
+                                            <div class="alert alert-warning text-center mt-3 mb-0" role="alert">
+                                                لا توجد مجموعات أخرى تابعة لنفس اللعبة للنقل إليها.
+                                            </div>
+                                            @endif
+                                        </form>
+                                        @else
+                                        <div class="alert alert-info text-center my-3" role="alert">
+                                            لا يوجد لاعبين في هذه المجموعة حالياً.
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="tab-pane" id="tab5">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if ($availablePlayers->isNotEmpty())
+                                        <form action="{{ route('admin.groups.addPlayersToGroup') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="group_id" value="{{ $groupId }}">
+
+                                            <div class="table-responsive">
+                                                <table class="table text-md-nowrap table-striped align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>الاسم</th>
+                                                            <th class="text-center">
+                                                                <input type="checkbox" id="selectAllAvailable" class="select-all-trigger" data-target="current_player_check">
+                                                                <label for="selectAllAvailable" class="mb-0 ms-1">تحديد الكل</label>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($availablePlayers as $player)
+                                                        <tr>
+                                                            <td>{{ $player->name }}</td>
+                                                            <td class="text-center">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox"
+                                                                        class="custom-control-input available_player_check"
+                                                                        id="available_player_{{ $player->id }}"
+                                                                        value="{{ $player->id }}"
+                                                                        name="player_ids[]">
+                                                                    <label class="custom-control-label" for="available_player_{{ $player->id }}"></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="text-center mt-3">
+                                                <button type="submit" class="btn btn-success submit d-inline-flex align-items-center gap-2">
+                                                    إضافة اللاعبين المحددين للمجموعة
+                                                </button>
+                                            </div>
+                                        </form>
+                                        @else
+                                        <div class="alert alert-info text-center my-3" role="alert">
+                                            لا يوجد لاعبين متاحين للإضافة حالياً.
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tab6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        @if ($coaches->isNotEmpty())
+                                            <div class="table-responsive">
+                                                <table class="table text-md-nowrap table-striped align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>الاسم</th>
+                                                            <th class="text-center">
+                                                                الدور
+                                                            </th>
+                                                            <th class="text-center">
+                                                                اساسي
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($coaches as $coach)
+                                                        <tr>
+                                                            <td>{{ $coach->name }}</td>
+                                                            <td>{{ $coach->role }}</td>
+                                                            <td>{{ $coach->is_primary }}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </form>
+                                        @else
+                                        <div class="alert alert-info text-center my-3" role="alert">
+                                            لا يوجد مدربين في هذه المجموعة حالياً.
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tab6">
-                        <p>praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,</p>
-                        <p class="mb-0">similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+@push('script')
+<script>
+    document.addEventListener('change', function (event) {
+        if (event.target && event.target.classList.contains('select-all-trigger')) {
+            let targetClass = event.target.getAttribute('data-target');
+            let checkboxes = document.getElementsByClassName(targetClass);
+            
+            for (let i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = event.target.checked;
+            }
+        }
+    });
+</script>
+@endpush

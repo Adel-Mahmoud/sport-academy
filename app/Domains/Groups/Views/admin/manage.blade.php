@@ -11,7 +11,7 @@
                     إدارة اللاعبين والمدربين
                 </div>
                 <p class="mg-b-20">يمكن اضافة و ازالة و نقل لاعبين و مدربين </p>
-                <livewire:groups.group-manager />
+                <livewire:groups.group-manager :id="$id"/>
             </div>
         </div>
     </div>

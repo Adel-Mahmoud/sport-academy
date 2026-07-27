@@ -3,28 +3,32 @@
 namespace App\Domains\Groups\Livewire;
 
 use Livewire\Component;
+use App\Domains\Groups\Actions\GetGroupCoachesAction;
 use App\Domains\Groups\Actions\GetGroupPlayersAction;
 use App\Domains\Groups\Actions\GetAvailablePlayersAction;
+use App\Domains\Groups\Actions\GetOtherGroupsInSameSportAction;
 
 class GroupManager extends Component
 {
-    protected GetGroupPlayersAction $getGroupPlayers;
-    protected GetAvailablePlayersAction $getAvailablePlayers;
-
-    public function boot(
-        GetGroupPlayersAction $getGroupPlayers,
-        GetAvailablePlayersAction $getAvailablePlayers
-    ) {
-        $this->getGroupPlayers = $getGroupPlayers;
-        $this->getAvailablePlayers = $getAvailablePlayers;
+    public $groupId;
+    
+    public function mount($id) {
+        $this->groupId = $id;
     }
 
-    public function render()
+    public function render(
+        GetGroupCoachesAction $getGroupCoaches,
+        GetGroupPlayersAction $getGroupPlayers,
+        GetAvailablePlayersAction $getAvailablePlayers,
+        GetOtherGroupsInSameSportAction $getOtherGroupsInSameSport,
+    )
     {
         return view('groups::livewire.groups-manager', [
-            'coaches' => $this->coachesRepository->getActive(),
-            'currentPlayers' => $this->getGroupPlayers->handle($this->groupId),
-            'availablePlayers' => $this->getAvailablePlayers->handle($this->groupId),
+            'groupId' => $this->groupId,
+            'coaches' => $getGroupCoaches->handle($this->groupId),
+            'currentPlayers' => $getGroupPlayers->handle($this->groupId),
+            'availablePlayers' => $getAvailablePlayers->handle($this->groupId),
+            'getOtherGroupsInSameSport' => $getOtherGroupsInSameSport->handle($this->groupId),
         ]);
     }
 }

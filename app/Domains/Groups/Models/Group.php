@@ -43,14 +43,14 @@ class Group extends Model
     public function coaches(): BelongsToMany
     {
         return $this->belongsToMany(Coach::class, 'group_coach', 'group_id', 'coach_id')
-            ->withPivot('role', 'is_primary', 'is_active')
+            ->withPivot('role', 'is_primary')
             ->withTimestamps();
     }
 
     public function players(): BelongsToMany
     {
         return $this->belongsToMany(Player::class, 'group_player', 'group_id', 'player_id')
-            ->withPivot('joined_at', 'is_active')
+            ->withPivot('joined_at')
             ->withTimestamps();
     }
 

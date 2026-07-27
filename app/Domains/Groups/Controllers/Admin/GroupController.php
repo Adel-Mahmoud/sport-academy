@@ -10,6 +10,8 @@ use App\Domains\Groups\UseCases\RegisterGroupUseCase;
 use App\Domains\Groups\UseCases\UpdateGroupUseCase;
 use App\Domains\Groups\Repositories\GroupRepository;
 use App\Domains\Sports\Repositories\SportRepository;
+use App\Domains\Groups\Actions\AddPlayersToGroupAction;
+use App\Domains\Groups\Requests\AddPlayersToGroupRequest;
 
 class GroupController extends Controller
 {
@@ -21,8 +23,9 @@ class GroupController extends Controller
     public function __construct(GroupRepository $groupRepository, SportRepository $sportRepository)
     {
         $this->groupRepository = $groupRepository;
-        $this->sportRepository = $sportRepository;}
-    
+        $this->sportRepository = $sportRepository;
+    }
+
     public function index(): View
     {
         $titlePage = $this->titlePage;
@@ -31,7 +34,7 @@ class GroupController extends Controller
 
     public function create(): View
     {
-        $titlePage = 'إضافة '.$this->titlePage.' جديد';
+        $titlePage = 'إضافة ' . $this->titlePage . ' جديد';
         $sectionPage = $this->sectionPage;
         $sports = $this->sportRepository->all();
         return view('groups::admin.create', compact('sectionPage', 'titlePage', 'sports'));
@@ -56,7 +59,7 @@ class GroupController extends Controller
         int $id,
     ): View {
         $group = $this->groupRepository->find($id);
-        $titlePage = 'تعديل '.$this->titlePage;
+        $titlePage = 'تعديل ' . $this->titlePage;
         $sectionPage = $this->sectionPage;
         $sports = $this->sportRepository->all();
         return view('groups::admin.edit', compact('group', 'sectionPage', 'titlePage', 'sports'));
@@ -82,8 +85,25 @@ class GroupController extends Controller
     {
         $titlePage = $this->sectionPage . ' - إدارة اللاعبين والمدربين';
         $sectionPage = $this->sectionPage;
-        $players = $this->groupRepository->getPlayers($id);
-        $coaches = $this->groupRepository->getCoaches($id);
-        return view('groups::admin.manage', compact('players', 'coaches', 'titlePage', 'sectionPage'));
+        return view('groups::admin.manage', compact('id', 'titlePage', 'sectionPage'));
     }
+
+
+
+    public function addPlayersToGroup(
+        AddPlayersToGroupRequest $request,
+        AddPlayersToGroupAction $action
+    ) {
+        $data = $request->validated();
+
+        $action->handle($data['group_id'], $data['player_ids']);
+        dd($data);
+        return redirect()->back()->with('swal', [
+            'type'  => 'success',
+            'title' => 'تم الإضافة!',
+            'text'  => 'تم إضافة اللاعبين بنجاح للمجموعة.',
+        ]);
+    }
+
+    public function TransferPlayersFromGroup($request) {}
 }

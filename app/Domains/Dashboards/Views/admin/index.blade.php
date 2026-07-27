@@ -28,7 +28,7 @@
                         </span>
                     </div>
 
-                    <div class="bg-pink-subtle text-danger p-3 rounded-3">
+                    <div class="bg-secondary-subtle text-danger p-3 rounded-3">
                         <i class="fas fa-calendar fa-2x"></i>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                         <h2 class="font-weight-bold mb-1">14</h2>
                         <span class="text-muted small">غياب اليوم</span>
                     </div>
-                    <div class="bg-secondary-subtle text-secondary p-3 rounded-3">
+                    <div class="bg-pink-subtle text-secondary p-3 rounded-3">
                         <i class="fas fa-user-slash fa-2x"></i>
                     </div>
                 </div>
@@ -262,7 +262,6 @@
                             <div>
                                 <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
                                 <span class="text-danger small font-weight-normal">
-                                    <i class="fas fa-user-times mr-1"></i> باقي: <strong>7 أيام</strong>
                                 </span>
                             </div>
                         </div>
@@ -277,7 +276,6 @@
                             <div>
                                 <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
                                 <span class="text-danger small font-weight-normal">
-                                    <i class="fas fa-user-times mr-1"></i> باقي: <strong>7 أيام</strong>
                                 </span>
                             </div>
                         </div>
@@ -292,7 +290,6 @@
                             <div>
                                 <h6 class="font-weight-bold mb-0 text-secondary">أحمد محمد علي</h6>
                                 <span class="text-danger small font-weight-normal">
-                                    <i class="fas fa-user-times mr-1"></i> باقي: <strong>7 أيام</strong>
                                 </span>
                             </div>
                         </div>

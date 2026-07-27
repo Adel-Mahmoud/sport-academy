@@ -9,22 +9,7 @@ class GroupRepository
 {
     public function all()
     {
-        return Group::latest()->paginate(20);
-    }
-
-    public function getSports()
-    {
-        return Group::select('sport_id')->distinct()->get();
-    }
-
-    public function getPlayers(int $groupId)
-    {
-        return Group::findOrFail($groupId)->players()->paginate(20);
-    }
-
-    public function getCoaches(int $groupId)
-    {
-        return Group::findOrFail($groupId)->coaches()->paginate(20);
+        return Group::latest()->get();
     }
 
     // public function getBranches()
@@ -64,11 +49,31 @@ class GroupRepository
         return Group::inactive()->get();
     }
 
+    public function getSports()
+    {
+        return Group::select('sport_id')->distinct()->get();
+    }
+
+    public function getOtherGroupsInSameSport(int $groupId)
+    {
+        $group = Group::findOrFail($groupId);
+
+        return Group::where('sport_id', $group->sport_id)
+            ->where('id', '!=', $groupId)
+            ->latest()
+            ->get();
+    }
+    
+    public function getGroupCoaches(int $groupId)
+    {
+        return Group::findOrFail($groupId)->coaches()->get();
+    }
+
     public function getGroupPlayers(int $groupId)
     {
         return Group::findOrFail($groupId)
             ->players()
-            ->wherePivot('is_active', true)
+            ->where('players.is_active', true)
             ->latest('players.name')
             ->get();
     }
@@ -77,10 +82,25 @@ class GroupRepository
     {
         return Player::active()
             ->whereDoesntHave('groups', function ($query) use ($groupId) {
-                $query->where('groups.id', $groupId)
-                    ->wherePivot('is_active', true);
+                $query->where('groups.id', $groupId);
             })
             ->orderBy('name')
             ->get();
+    }
+
+    public function addPlayersToGroup(int $groupId, array $playerIds)
+    {
+        $group = Group::findOrFail($groupId);
+
+        $attachData = [];
+        $now = now();
+
+        foreach ($playerIds as $playerId) {
+            $attachData[$playerId] = [
+                'joined_at' => $now,
+            ];
+        }
+
+        return $group->players()->syncWithoutDetaching($attachData);
     }
 }
