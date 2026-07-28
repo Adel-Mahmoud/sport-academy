@@ -4,6 +4,7 @@ namespace App\Domains\Groups\Repositories;
 
 use App\Domains\Groups\Models\Group;
 use App\Domains\Players\Models\Player;
+use Illuminate\Support\Facades\DB;
 
 class GroupRepository
 {
@@ -63,7 +64,7 @@ class GroupRepository
             ->latest()
             ->get();
     }
-    
+
     public function getGroupCoaches(int $groupId)
     {
         return Group::findOrFail($groupId)->coaches()->get();
@@ -102,5 +103,27 @@ class GroupRepository
         }
 
         return $group->players()->syncWithoutDetaching($attachData);
+    }
+
+
+    public function transferPlayers(int $fromGroupId, int $targetGroupId, array $playerIds)
+    {
+        return DB::transaction(function () use ($fromGroupId, $targetGroupId, $playerIds) {
+            $fromGroup   = Group::findOrFail($fromGroupId);
+            $targetGroup = Group::findOrFail($targetGroupId);
+
+            $fromGroup->players()->detach($playerIds);
+
+            $attachData = [];
+            $now = now();
+
+            foreach ($playerIds as $playerId) {
+                $attachData[$playerId] = [
+                    'joined_at' => $now,
+                ];
+            }
+
+            return $targetGroup->players()->syncWithoutDetaching($attachData);
+        });
     }
 }

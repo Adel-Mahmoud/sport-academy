@@ -32,6 +32,7 @@
                                     <div class="card-body">
                                         @if ($currentPlayers->isNotEmpty())
                                         <form action="{{ route('admin.groups.transferPlayers') }}" method="POST">
+                                            @method("PUT")
                                             @csrf
                                             <input type="hidden" name="from_group_id" value="{{ $groupId }}">
 
@@ -41,8 +42,7 @@
                                                         <tr>
                                                             <th>الاسم</th>
                                                             <th class="text-center">
-                                                                <input type="checkbox" id="selectAllCurrent" class="select-all-trigger" data-target="current_player_check">
-                                                                <label for="selectAllCurrent" class="mb-0 ms-1">تحديد الكل</label>
+                                                                <label for="selectAllCurrent" class="mb-0 ms-1">تحديد </label>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -68,16 +68,17 @@
 
                                             @if ($getOtherGroupsInSameSport->isNotEmpty())
                                             <div class="d-flex align-items-center justify-content-center gap-2 mt-4">
+                                                
+                                                <button type="submit" class="btn btn-primary submit d-inline-flex align-items-center gap-2">
+                                                    نقل اللاعبين المحددين
+                                                </button>
+                                                
                                                 <select name="target_group_id" class="form-control w-auto" required>
                                                     <option value="" disabled selected>-- اختر المجموعة المراد النقل إليها --</option>
                                                     @foreach($getOtherGroupsInSameSport as $group)
                                                     <option value="{{ $group->id }}">{{ $group->name }}</option>
                                                     @endforeach
                                                 </select>
-
-                                                <button type="submit" class="btn btn-primary submit d-inline-flex align-items-center gap-2">
-                                                    نقل اللاعبين المحددين
-                                                </button>
                                             </div>
                                             @else
                                             <div class="alert alert-warning text-center mt-3 mb-0" role="alert">
@@ -108,8 +109,7 @@
                                                         <tr>
                                                             <th>الاسم</th>
                                                             <th class="text-center">
-                                                                <input type="checkbox" id="selectAllAvailable" class="select-all-trigger" data-target="current_player_check">
-                                                                <label for="selectAllAvailable" class="mb-0 ms-1">تحديد الكل</label>
+                                                                <label for="selectAllAvailable" class="mb-0 ms-1">تحديد </label>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -194,17 +194,3 @@
 
     </div>
 </div>
-@push('script')
-<script>
-    document.addEventListener('change', function (event) {
-        if (event.target && event.target.classList.contains('select-all-trigger')) {
-            let targetClass = event.target.getAttribute('data-target');
-            let checkboxes = document.getElementsByClassName(targetClass);
-            
-            for (let i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = event.target.checked;
-            }
-        }
-    });
-</script>
-@endpush

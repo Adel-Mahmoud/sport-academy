@@ -8,7 +8,8 @@
         <div class="card mg-b-20" id="tabs-style2">
             <div class="card-body">
                 <div class="main-content-label mg-b-5">
-                    إدارة اللاعبين والمدربين
+                    إدارة اللاعبين والمدربين الخاصة بالمجموعة
+                    ({{ $group->name }})
                 </div>
                 <p class="mg-b-20">يمكن اضافة و ازالة و نقل لاعبين و مدربين </p>
                 <livewire:groups.group-manager :id="$id"/>

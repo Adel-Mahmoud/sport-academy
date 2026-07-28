@@ -12,6 +12,8 @@ use App\Domains\Groups\Repositories\GroupRepository;
 use App\Domains\Sports\Repositories\SportRepository;
 use App\Domains\Groups\Actions\AddPlayersToGroupAction;
 use App\Domains\Groups\Requests\AddPlayersToGroupRequest;
+use App\Domains\Groups\Requests\TransferPlayersRequest;
+use App\Domains\Groups\Actions\TransferPlayersAction;
 
 class GroupController extends Controller
 {
@@ -85,7 +87,8 @@ class GroupController extends Controller
     {
         $titlePage = $this->sectionPage . ' - إدارة اللاعبين والمدربين';
         $sectionPage = $this->sectionPage;
-        return view('groups::admin.manage', compact('id', 'titlePage', 'sectionPage'));
+        $group = $this->groupRepository->find($id);
+        return view('groups::admin.manage', compact('id', 'group', 'titlePage', 'sectionPage'));
     }
 
 
@@ -105,5 +108,22 @@ class GroupController extends Controller
         ]);
     }
 
-    public function TransferPlayersFromGroup($request) {}
+    public function transferPlayers(
+        TransferPlayersRequest $request,
+        TransferPlayersAction $action
+    ) {
+        $data = $request->validated();
+
+        $action->handle(
+            $data['from_group_id'],
+            $data['target_group_id'],
+            $data['player_ids']
+        );
+
+        return redirect()->back()->with('swal', [
+            'type'  => 'success',
+            'title' => 'تم نقل اللاعبين!',
+            'text'  => 'تم نقل اللاعبين المحددين إلى المجموعة الجديدة بنجاح.',
+        ]);
+    }
 }
