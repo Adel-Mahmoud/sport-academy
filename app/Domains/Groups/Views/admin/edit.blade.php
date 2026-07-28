@@ -6,15 +6,14 @@
 <x-form
     :action="route('admin.groups.update', $group->id)"
     submitLabel="تعديل مجموعة"
-    cancelRoute="admin.groups.index"
->
+    cancelRoute="admin.groups.index">
     @method('PUT')
 
     <div class="row">
         <div class="col-md-6 mb-3">
             <label class="form-label">الاسم</label>
             <input type="text" name="name" class="form-control"
-                   value="{{ old('name', $group->name) }}" required>
+                value="{{ old('name', $group->name) }}" required>
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md-6 mb-3">
@@ -22,7 +21,7 @@
             <select name="sport_id" class="form-control" required>
                 <option value="">اختر الرياضة</option>
                 @foreach($sports as $sport)
-                    <option value="{{ $sport->id }}" {{ old('sport_id', $group->sport_id) == $sport->id ? 'selected' : '' }}>{{ $sport->name }}</option>
+                <option value="{{ $sport->id }}" {{ old('sport_id', $group->sport_id) == $sport->id ? 'selected' : '' }}>{{ $sport->name }}</option>
                 @endforeach
             </select>
             @error('sport_id') <span class="text-danger">{{ $message }}</span> @enderror
@@ -30,7 +29,7 @@
         <div class="col-md-6 mb-3">
             <label class="form-label">المستوى</label>
             <input type="text" name="level" class="form-control"
-                   value="{{ old('level', $group->level) }}">
+                value="{{ old('level', $group->level) }}">
             @error('level') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
         <div class="col-md-6 mb-3">
@@ -50,15 +49,16 @@
         <div class="col-md-6 mb-3">
             <label class="form-label">تاريخ البداية</label>
             <input type="date" name="start_date" class="form-control"
-                   value="{{ old('start_date', $group->start_date) }}" required>
+                value="{{ old('start_date', $group->start_date?->format('Y-m-d')) }}" required>
             @error('start_date') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
+
         <div class="col-md-6 mb-3">
             <label class="form-label">تاريخ النهاية</label>
             <input type="date" name="end_date" class="form-control"
-                   value="{{ old('end_date', $group->end_date) }}" required>
+                value="{{ old('end_date', $group->end_date?->format('Y-m-d')) }}" required>
             @error('end_date') <span class="text-danger">{{ $message }}</span> @enderror
-        </div> 
+        </div>
     </div>
 </x-form>
 @endsection

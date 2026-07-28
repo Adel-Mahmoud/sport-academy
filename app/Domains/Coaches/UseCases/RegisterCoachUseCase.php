@@ -8,7 +8,6 @@ use App\Domains\Users\Services\UserService;
 use App\Domains\Coaches\DTOs\CreateCoachData;
 use App\Domains\Coaches\Repositories\CoachRepository;
 use App\Domains\Users\DTOs\CreateUserData;
-use Spatie\Permission\Models\Role;
 
 class RegisterCoachUseCase
 {
@@ -22,11 +21,16 @@ class RegisterCoachUseCase
         return DB::transaction(function () use ($data) {
 
             $coachData = CreateCoachData::fromArray($data);
-            $data['roles'] = ['coach'];
-            $user = $this->userService->registerUser(CreateUserData::fromArray($data));
+
+            $userId = null;
+            if ($coachData->has_account) {
+                $data['roles'] = ['coach'];
+                $user = $this->userService->registerUser(CreateUserData::fromArray($data));
+                $userId = $user->id;
+            }
 
             $coach = $this->coachRepository->create([
-                'user_id' => $user->id,
+                'user_id' => $userId,
                 'name' => $coachData->name,
                 'phone' => $coachData->phone,
                 'hire_date' => $coachData->hire_date,

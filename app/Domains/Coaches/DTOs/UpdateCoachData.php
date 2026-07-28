@@ -9,6 +9,7 @@ class UpdateCoachData
         public string $phone,
         public string $hire_date,
         public float $salary,
+        public bool $has_account = false,
         public bool $is_active = true,
     ) {}
 
@@ -19,7 +20,8 @@ class UpdateCoachData
             phone: $data['phone'],
             hire_date: $data['hire_date'],
             salary: $data['salary'],
-            is_active: $data['is_active'] ?? true
+            has_account: filter_var($data['has_account'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            is_active: filter_var($data['is_active'] ?? true, FILTER_VALIDATE_BOOLEAN),
         );
     }
 
@@ -30,6 +32,7 @@ class UpdateCoachData
             'phone' => $this->phone,
             'hire_date' => $this->hire_date,
             'salary' => $this->salary,
+            'has_account' => $this->has_account,
             'is_active' => $this->is_active,
         ];
     }

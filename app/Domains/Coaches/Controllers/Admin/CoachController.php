@@ -49,7 +49,8 @@ class CoachController extends Controller
         $coach = $useCase->execute($id);
         $titlePage = 'تعديل بيانات المدرب';
         $sectionPage = 'المدربين';
-        return view('coaches::admin.edit', compact('coach', 'sectionPage', 'titlePage'));
+        $email = $coach?->user->email ?? null;
+        return view('coaches::admin.edit', compact('coach', 'email', 'sectionPage', 'titlePage'));
     }
 
     public function update(

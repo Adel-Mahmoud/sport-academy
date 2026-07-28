@@ -21,7 +21,6 @@ class Group extends Model
         'is_active',
         'start_date',
         'end_date',
-        'is_active',
     ];
 
     protected $casts = [

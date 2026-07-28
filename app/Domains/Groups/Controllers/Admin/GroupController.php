@@ -100,7 +100,6 @@ class GroupController extends Controller
         $data = $request->validated();
 
         $action->handle($data['group_id'], $data['player_ids']);
-        dd($data);
         return redirect()->back()->with('swal', [
             'type'  => 'success',
             'title' => 'تم الإضافة!',

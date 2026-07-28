@@ -24,4 +24,16 @@ class CreateUserData
             roles: $data['roles'] ?? [],
         );
     }
+
+    public function toArray(): array
+    {
+        return [
+            'name'      => $this->name,
+            'email'     => $this->email,
+            'password'  => $this->password,
+            'type'      => $this->type,
+            'is_active' => $this->is_active,
+            'roles'     => $this->roles,
+        ];
+    }
 }

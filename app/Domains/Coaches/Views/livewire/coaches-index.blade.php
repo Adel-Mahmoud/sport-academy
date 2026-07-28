@@ -50,7 +50,6 @@
                             <th>#</th>
                             <th>اسم المدرب</th>
                             <th>رقم الهاتف</th>
-                            <th>البريد الإلكتروني</th>
                             <th>تاريخ التعيين</th>
                             <th>الراتب</th>
                             <th>الحالة</th>
@@ -81,7 +80,6 @@
 
                                 <td>{{ $coach->phone ?? '-' }}</td>
 
-                                <td>{{ $coach->email }}</td>
 
                                 <td>{{ $coach->hire_date }}</td>
 

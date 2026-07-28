@@ -16,13 +16,19 @@ class Sport extends Model
     {
         return $this->belongsTo(\App\Domains\Branches\Models\Branch::class);
     }
-    public function scopeActive($query)
+
+    public function groups()
     {
-        return $query->where('is_active', true);
+        return $this->hasMany(\App\Domains\Groups\Models\Group::class);
     }
 
     public function levels()
     {
         return $this->hasMany(SportLevel::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }
