@@ -17,17 +17,10 @@ class UpdateCoachRequest extends FormRequest
         $coach = Coach::query()
             ->select('id', 'user_id')
             ->findOrFail($this->route('coach'));
-        $hasAccount = $this->boolean('has_account');
-
         return [
-            'has_account' => 'nullable|boolean',
             'name'        => 'required|string|max:255',
             'phone'       => 'nullable|string|max:20',
-
-            'email'       => $hasAccount
-                ? 'required|email|unique:users,email,' . ($coach->user_id ?? 'NULL')
-                : 'nullable|email',
-
+            'email'       => 'nullable|email',
             'password'    => 'nullable|string|min:8',
             'hire_date'   => 'required|date',
             'salary'      => 'required|numeric|min:0',

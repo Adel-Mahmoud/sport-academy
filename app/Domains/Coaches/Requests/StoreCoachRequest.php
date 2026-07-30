@@ -14,12 +14,11 @@ class StoreCoachRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'has_account' => 'nullable|boolean',
             'name'           => 'required|string|max:255',
             'phone'          => 'nullable|string|max:20',
 
-            'email'          => 'required_if:has_account,1,true|nullable|email|unique:users,email',
-            'password'       => 'required_if:has_account,1,true|nullable|string|min:8',
+            'email'          => 'nullable|email|unique:users,email',
+            'password'       => 'nullable|string|min:8',
 
             'hire_date'      => 'required|date',
             'salary'         => 'required|numeric|min:0',

@@ -8,7 +8,8 @@ class CreateCoachData
         public string $phone,
         public string $hire_date,
         public float $salary,
-        public bool $has_account = false,
+        public ?string $email = null,
+        public ?string $password = null,
         public bool $is_active = true,
     ) {}
 
@@ -19,7 +20,8 @@ class CreateCoachData
             phone: $data['phone'],
             hire_date: $data['hire_date'],
             salary: $data['salary'],
-            has_account: filter_var($data['has_account'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            email: $data['email'] ?? null,
+            password: $data['password'] ?? null,
             is_active: filter_var($data['is_active'] ?? true, FILTER_VALIDATE_BOOLEAN),
         );
     }
@@ -31,7 +33,8 @@ class CreateCoachData
             'phone' => $this->phone,
             'hire_date' => $this->hire_date,
             'salary' => $this->salary,
-            'has_account' => $this->has_account,
+            'email' => $this->email ?? null,
+            'password' => $this->password ?? null,
             'is_active' => $this->is_active,
         ];
     }

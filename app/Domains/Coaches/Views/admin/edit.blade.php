@@ -13,22 +13,7 @@
 
     <div class="row">
 
-        <div class="col-12 mb-3">
-            <div class="custom-control custom-checkbox bg-light p-3 rounded border">
-                <input type="checkbox"
-                       name="has_account"
-                       id="has_account"
-                       value="1"
-                       class="custom-control-input"
-                       {{ old('has_account', $coach->user_id ? 1 : 0) ? 'checked' : '' }}>
-                <label class="custom-control-label fw-bold text-dark" for="has_account">
-                    يمتلك حساب دخول للنظام (البريد الإلكتروني وكلمة المرور)
-                </label>
-            </div>
-            @error('has_account') <span class="text-danger d-block">{{ $message }}</span> @enderror
-        </div>
-
-        <div id="account_fields_container" class="col-12 mb-3 {{ old('has_account', $coach->user_id ? 1 : 0) ? '' : 'd-none' }}">
+        <div id="account_fields_container" class="col-12 mb-3">
             <div class="p-3 border rounded bg-white">
                 <x-auth.login-fields :emailRequired="false" :passwordRequired="false" :email="$email" />
             </div>
@@ -89,37 +74,4 @@
 
 </x-form>
 
-@endsection
-@section('js')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const hasAccountCheckbox = document.getElementById('has_account');
-        const accountContainer = document.getElementById('account_fields_container');
-
-        function toggleAccountFields() {
-            if (!hasAccountCheckbox || !accountContainer) return;
-
-            const isChecked = hasAccountCheckbox.checked;
-
-            if (isChecked) {
-                accountContainer.classList.remove('d-none');
-            } else {
-                accountContainer.classList.add('d-none');
-            }
-
-            const emailInput = accountContainer.querySelector('input[type="email"]');
-            if (emailInput) {
-                if (isChecked) {
-                    emailInput.setAttribute('required', 'required');
-                } else {
-                    emailInput.removeAttribute('required');
-                }
-            }
-        }
-
-        toggleAccountFields();
-
-        hasAccountCheckbox.addEventListener('change', toggleAccountFields);
-    });
-</script>
 @endsection

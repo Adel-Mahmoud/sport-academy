@@ -26,7 +26,7 @@ class UpdateCoachUseCase
             $userId = $coach->user_id;
             $userToDelete = null;
 
-            if ($coachData->has_account) {
+            if (isset($coachData->email, $coachData->password)) {
                 if ($userId) {
                     $this->userService->updateUser(
                         UpdateUserData::fromArray([

@@ -9,6 +9,7 @@ use App\Domains\Coaches\Requests\UpdateCoachRequest;
 use App\Domains\Coaches\UseCases\GetCoachUseCase;
 use App\Domains\Coaches\UseCases\RegisterCoachUseCase;
 use App\Domains\Coaches\UseCases\UpdateCoachUseCase;
+use App\Domains\Sports\Repositories\SportRepository;
 
 class CoachController extends Controller
 {
@@ -19,11 +20,12 @@ class CoachController extends Controller
         return view('coaches::admin.index', compact('titlePage'));
     }
 
-    public function create(): View
+    public function create(SportRepository $sportRepository): View
     {
         $titlePage = 'مدرب جديد';
         $sectionPage = 'المدربين';
-        return view('coaches::admin.create', compact('sectionPage', 'titlePage'));
+        $sports = $sportRepository->all();
+        return view('coaches::admin.create', compact('sectionPage', 'titlePage', 'sports'));
     }
 
 

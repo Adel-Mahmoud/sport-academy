@@ -23,7 +23,7 @@ class RegisterCoachUseCase
             $coachData = CreateCoachData::fromArray($data);
 
             $userId = null;
-            if ($coachData->has_account) {
+            if (isset($coachData->email, $coachData->password)) {
                 $data['roles'] = ['coach'];
                 $user = $this->userService->registerUser(CreateUserData::fromArray($data));
                 $userId = $user->id;

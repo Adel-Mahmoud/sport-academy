@@ -68,11 +68,11 @@
 
                                             @if ($getOtherGroupsInSameSport->isNotEmpty())
                                             <div class="d-flex align-items-center justify-content-center gap-2 mt-4">
-                                                
+
                                                 <button type="submit" class="btn btn-primary submit d-inline-flex align-items-center gap-2">
                                                     نقل اللاعبين المحددين
                                                 </button>
-                                                
+
                                                 <select name="target_group_id" class="form-control w-auto" required>
                                                     <option value="" disabled selected>-- اختر المجموعة المراد النقل إليها --</option>
                                                     @foreach($getOtherGroupsInSameSport as $group)
@@ -152,31 +152,30 @@
                                 <div class="card">
                                     <div class="card-body">
                                         @if ($coaches->isNotEmpty())
-                                            <div class="table-responsive">
-                                                <table class="table text-md-nowrap table-striped align-middle">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>الاسم</th>
-                                                            <th class="text-center">
-                                                                الدور
-                                                            </th>
-                                                            <th class="text-center">
-                                                                اساسي
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($coaches as $coach)
-                                                        <tr>
-                                                            <td>{{ $coach->name }}</td>
-                                                            <td>{{ $coach->role }}</td>
-                                                            <td>{{ $coach->is_primary }}</td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </form>
+                                        <div class="table-responsive">
+                                            <table class="table text-md-nowrap table-striped align-middle">
+                                                <thead>
+                                                    <tr>
+                                                        <th>الاسم</th>
+                                                        <th class="text-center">
+                                                            الدور
+                                                        </th>
+                                                        <th class="text-center">
+                                                            اساسي
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($coaches as $coach)
+                                                    <tr>
+                                                        <td>{{ $coach->name }}</td>
+                                                        <td>{{ $coach->role }}</td>
+                                                        <td>{{ $coach->is_primary }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         @else
                                         <div class="alert alert-info text-center my-3" role="alert">
                                             لا يوجد مدربين في هذه المجموعة حالياً.
