@@ -16,6 +16,18 @@ class SportRepository
         return Sport::find($id);
     }
 
+    public function findWithGroupsCount(int $id): Sport
+    {
+        return Sport::withCount('groups')->findOrFail($id);
+    }
+
+    public function hasGroups(int $id): bool
+    {
+        return Sport::whereKey($id)
+            ->has('groups')
+            ->exists();
+    }
+
     public function create(array $data)
     {
         return Sport::create($data);

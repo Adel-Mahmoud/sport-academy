@@ -15,12 +15,6 @@ class CoachesIndex extends BaseTableComponent
         'refreshComponent' => '$refresh',
     ];
 
-    protected function beforeDelete($coach): bool
-    {
-        $coach->user->delete();
-        return true;
-    }
-
     public function render()
     {
         $coaches = $this->model::query()

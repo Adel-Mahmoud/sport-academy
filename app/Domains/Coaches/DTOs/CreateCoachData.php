@@ -10,6 +10,8 @@ class CreateCoachData
         public float $salary,
         public ?string $email = null,
         public ?string $password = null,
+        public ?array $sports = [],
+        public ?array $groups = [],
         public bool $is_active = true,
     ) {}
 
@@ -22,6 +24,8 @@ class CreateCoachData
             salary: $data['salary'],
             email: $data['email'] ?? null,
             password: $data['password'] ?? null,
+            sports: $data['sports'] ?? [],
+            groups: $data['groups'] ?? [],
             is_active: filter_var($data['is_active'] ?? true, FILTER_VALIDATE_BOOLEAN),
         );
     }
@@ -35,6 +39,8 @@ class CreateCoachData
             'salary' => $this->salary,
             'email' => $this->email ?? null,
             'password' => $this->password ?? null,
+            'sports' => $this->sports ?? [],
+            'groups' => $this->groups ?? [],
             'is_active' => $this->is_active,
         ];
     }

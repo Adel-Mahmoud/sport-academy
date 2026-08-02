@@ -65,7 +65,7 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">الراتب</label>
-                                    <input type="number" step="0.01" name="salary" class="form-control" value="{{ old('salary') }}">
+                                    <input type="number" step="0.01" name="salary" class="form-control" value="{{ old('salary') }}" required>
                                     @error('salary') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
 
@@ -241,6 +241,7 @@
     const requiredFields = {
         name: '',
         phone: '',
+        salary: '',
     };
 
     document.querySelector('[name="name"]').addEventListener('input', e => {
@@ -250,17 +251,17 @@
     document.querySelector('[name="phone"]').addEventListener('input', e => {
         requiredFields.phone = e.target.value.trim();
     });
+
+    document.querySelector('[name="salary"]').addEventListener('input', e => {
+        requiredFields.salary = e.target.value.trim();
+    });
     document.querySelector('.submit').addEventListener('click', function(e) {
 
-        if (!requiredFields.name || !requiredFields.phone) {
-            e.preventDefault();
-
+        if (!requiredFields.name || !requiredFields.phone || !requiredFields.salary) {
             const tabId = 'tab4';
             document.querySelector(`a[href="#${tabId}"]`).click();
-            e.submit();
             return;
         }
-
     });
 </script>
 @endsection

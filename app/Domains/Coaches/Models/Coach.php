@@ -33,7 +33,7 @@ class Coach extends Model
 
     public function sports()
     {
-        return $this->belongsToMany(\App\Domains\Sports\Models\Sport::class, 'coach_sport', 'coach_id', 'sport_id')
+        return $this->belongsToMany(\App\Domains\Sports\Models\Sport::class, 'sport_coach', 'coach_id', 'sport_id')
             ->withTimestamps();
     }
 
